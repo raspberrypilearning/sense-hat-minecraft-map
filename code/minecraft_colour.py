@@ -1,9 +1,9 @@
-from mcpi import minecraft
 from sense_hat import SenseHat
+from mcpi import minecraft
 from time import sleep
 
-mc = minecraft.Minecraft.create()
 sense = SenseHat()
+mc = minecraft.Minecraft.create()
 
 # blocks
 grass = 2

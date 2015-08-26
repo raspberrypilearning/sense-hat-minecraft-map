@@ -73,6 +73,8 @@ The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs (light-emitting 
 
     *Inside each of the Sense HAT's 64 LEDs are three smaller LEDs - a red, a green and a blue. All you're doing is setting the brightness of each one and it gives the whole LED a different colour*
 
+**Download a copy of [colour.py](code/colour.py)**
+
 ## Exploring the Minecraft world
 
 Now you've had a go at setting the colours of the Sense HAT LED matrix, let's open up Minecraft, have a look around and see what block types you can identify.
@@ -92,12 +94,12 @@ Now you've had a go at setting the colours of the Sense HAT LED matrix, let's op
 1. Enter the following code to get started:
 
     ```python
-    from mcpi.minecraft import Minecraft
     from sense_hat import SenseHat
+    from mcpi.minecraft import Minecraft
     from time import sleep
 
-    mc = Minecraft.create()
     sense = SenseHat()
+    mc = Minecraft.create()
 
     mc.postToChat("Hello Minecraft!")
     sense.clear(0, 255, 0)
@@ -236,6 +238,129 @@ Now you've explored the Minecraft world and seen the different block IDs that ar
 
 1. Now add more blocks and colours to your dictionary!
 
+**Download a copy of [minecraft_colour.py](code/minecraft_colour.py)**
+
+## Setting individual LEDs on the Sense HAT
+
+Until now, all you've done is set the whole Sense HAT LED display to the same colour. It's possible to set each pixel individually using the Sense Hat module's `set_pixel` method.
+
+1. Create a new Python file and save it as `pixels.py`.
+
+1. Write the following code:
+
+    ```python
+    from sense_hat import SenseHat
+
+    sense  = SenseHat()
+
+    sense.clear()
+    sense.set_pixel(0, 0, 255, 255, 255)
+    ```
+
+1. Save and run the code. It should clear the display and set the top left pixel to white.
+
+    **How does it work?**
+
+    The `sense.set_pixel` method is used to set a particular pixel to a particular colour. The pixel is given as `x` and `y` and the colour is given as `R`, `G` and `B`. There are two ways of using the method:
+
+    - pass in the `R`, `G` and `B` values separately:
+
+    ```python
+    sense.set_pixel(x, y, r, g, b)
+    ```
+
+    - use a 3-tuple for the colour and pass it in as a variable:
+
+    ```python
+    white = (255, 255, 255)
+    sense.set_pixel(x, y, white)
+    ```
+
+1. Try a loop:
+
+    ```python
+    sense.clear()
+    for y in range(8):
+        for x in range(8):
+            sense.set_pixel(x, y, 255, 0, 0)
+            sleep(0.1)
+    ```
+
+    **Things to try:**
+
+    - What happens when you reverse the order of the loops? `for x in range(8)` then `for y in range(8)`
+    - What happens if you add a `sense.clear()` before `sense.set_pixel()`?
+    - What happens if you try `range(8, -1, -1)`?
+
+1. Try this example using rows of colours:
+
+    ```python
+    white = (255, 255, 255)
+    red = (255, 0, 0)
+    green = (0, 255, 0)
+    blue = (0, 0, 255)
+    yellow = (255, 255, 0)
+
+    colours = [white, red, white, green, white, blue, white, yellow]
+
+    sense.clear()
+    for y in range(8):
+        colour = colours[y]
+        for x in range(8):
+            sense.set_pixel(x, y, colour)
+            sleep(0.1)
+    ```
+
+1. You can also use the `set_pixels()` method which takes in a list of 64 colour tuples. Try the following code as an example:
+
+    ```python
+    r = red
+    b = blue
+
+    pixels = [
+        r, b, r, b, r, b, r, b,
+        b, r, b, r, b, r, b, r,
+        r, b, r, b, r, b, r, b,
+        b, r, b, r, b, r, b, r,
+        r, b, r, b, r, b, r, b,
+        b, r, b, r, b, r, b, r,
+        r, b, r, b, r, b, r, b,
+        b, r, b, r, b, r, b, r,
+    ]
+
+    sense.set_pixels(pixels)
+    ```
+
+    This should give you a checkerboard of red and blue pixels.
+
 ## Create a map
+
+Now you have your Sense HAT showing the colour of the block you're standing on, you can use the same logic to show a different colour for each block around you to make a mini map of the Minecraft world on the 8x8 display.
+
+In order to make an 8x8 map, you'll need to retrieve the block IDs for all blocks immediately surrounding your player - enough to fill the 8x8 display. The Minecraft API does have a `mc.getBlocks()` function, but unfortunately it doesn't actually work, so you'll have to write your own function.
+
+1. Start by writing the following boilerplate code:
+
+    ```python
+    from sense_hat import SenseHat
+    from mcpi import minecraft
+    from time import sleep
+
+    sense = SenseHat()
+    mc = minecraft.Minecraft.create()
+
+    def get_blocks():
+        blocks = []
+
+        return blocks
+    ```
+
+    Here you've imported the libraries you'll need, created a connection to the Sense HAT and to the Minecraft world, and created a function called `get_blocks` which returns an empty list.
+
+1. Now you'll need to implement your `get_blocks` function. The function will eventually need to return a list of 64 pixels representing the blocks around your player, but let's build it up slowly.
+
+
+
+**Download a copy of [minecraft_map.py](code/minecraft_map.py)**
 
 ## What next?

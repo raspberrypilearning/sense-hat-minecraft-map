@@ -1,6 +1,9 @@
-from mcpi import minecraft
 from sense_hat import SenseHat
+from mcpi import minecraft
 from time import sleep
+
+sense = SenseHat()
+mc = minecraft.Minecraft.create()
 
 def get_blocks(size):
     global known_blocks
@@ -33,9 +36,6 @@ def lookup_colour(block):
 
 def map_blocks_to_colours(blocks):
     return [lookup_colour(block) for block in blocks]
-
-mc = minecraft.Minecraft.create()
-sense = SenseHat()
 
 known_blocks = {}
 
