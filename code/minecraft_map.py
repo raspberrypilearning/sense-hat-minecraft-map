@@ -5,24 +5,22 @@ from time import sleep
 sense = SenseHat()
 mc = minecraft.Minecraft.create()
 
-def get_blocks(size):
+known_blocks = {}
+
+def get_blocks():
     global known_blocks
 
     x, y, z = mc.player.getTilePos()
     y -= 1
-    n0 = (size - 1) / 2
-    n1 = ((size + 1) / 2)
-    if size % 2 == 0:
-        n1 += 1
 
     blocks = []
-    for dx in range(x-n0, x+n1):
-        for dz in range(z-n0, z+n1):
+    for dx in range(x-3, x+5):
+        for dz in range(z-3, z+5):
             b = (dx, dz)
-            try:
+            if b in known_blocks:
                 block = known_blocks[b]
-            except KeyError:
-                block = mc.getBlock(dx, y+0, dz)
+            else:
+                block = mc.getBlock(dx, y, dz)
                 known_blocks[b] = block
             blocks.append(block)
 
@@ -36,8 +34,6 @@ def lookup_colour(block):
 
 def map_blocks_to_colours(blocks):
     return [lookup_colour(block) for block in blocks]
-
-known_blocks = {}
 
 # blocks
 air = 0
@@ -63,7 +59,7 @@ colours = {
 player_pos = 27
 
 while True:
-    blocks = get_blocks(8)
+    blocks = get_blocks()
     pixels = map_blocks_to_colours(blocks)
     pixels[player_pos] = black  # denote player as black pixel
     sense.set_pixels(pixels)
