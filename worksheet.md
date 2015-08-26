@@ -333,6 +333,8 @@ Until now, all you've done is set the whole Sense HAT LED display to the same co
 
     This should give you a checkerboard of red and blue pixels.
 
+**Download a copy of [pixels.py](code/pixels.py)**
+
 ## Write a get_blocks function
 
 Now you have your Sense HAT showing the colour of the block you're standing on, you can use the same logic to show a different colour for each block around you to make a mini map of the Minecraft world on the 8x8 display.
