@@ -584,16 +584,7 @@ Now all that's left to do is create the map. You've already learned how to look 
 
 1. You'll also need to define the variable `player_pos`. It'll need to be the number between `0` and `63` - the pixel which is the defined centre point of the grid. Since we used the range `x-3` to `x+5` and `z-3` to `z+5` the centre point will be the `(3, 3)` coordinate on the LED matrix, which is pixel number `27` as shown:
 
-    |    |    |    |        |    |    |    |    |
-    | -- | -- | -- | ------ | -- | -- | -- | -- |
-    |  0 |  1 |  2 |    3   |  4 |  5 |  6 |  7 |
-    |  8 |  9 | 10 |   11   | 12 | 13 | 14 | 15 |
-    | 16 | 17 | 18 |   19   | 20 | 21 | 22 | 23 |
-    | 24 | 25 | 26 | **27** | 28 | 29 | 30 | 31 |
-    | 32 | 33 | 34 |   35   | 36 | 37 | 38 | 39 |
-    | 40 | 41 | 42 |   43   | 44 | 45 | 46 | 47 |
-    | 48 | 49 | 50 |   51   | 52 | 53 | 54 | 55 |
-    | 56 | 57 | 58 |   59   | 60 | 61 | 62 | 63 |
+    ![](images/sense-hat-grid-centre-point.png)
 
 1. Now add a line to your `while` loop to modify the `pixels` list to set a black pixel where your player is standing:
 
