@@ -1,4 +1,4 @@
-# Make a Minecraft Map with the Sense HAT
+# Sense HAT Minecraft Map
 
 Use the Sense HAT to create a map of the world around your player in Minecraft: Pi Edition.
 
@@ -605,3 +605,11 @@ Now all that's left to do is create the map. You've already learned how to look 
 **Download a copy of [minecraft_map.py](code/minecraft_map.py)**
 
 ## What next?
+
+Now you've created a Minecraft Map on your Sense HAT:
+
+- Make a [Minecraft Photobooth](https://www.raspberrypi.org/learning/minecraft-photobooth/) with a camera module
+- Create a ["Whac-a-Block" game](https://www.raspberrypi.org/learning/minecraft-whac-a-block-game/) in Minecraft
+- Try making your own 8x8 pixel art, game or animation on the Sense HAT display
+- Look at the sensors on the Sense HAT and try to use them along with the LED display! See the [Astro Pi Guide](https://www.raspberrypi.org/learning/getting-started-with-astro-pi/)
+- Think about what you would do with a Sense HAT in space! See the [Astro Pi](http://astro-pi.org/) competition
