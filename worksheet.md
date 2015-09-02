@@ -449,8 +449,6 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
     ![Third get_blocks loop](images/third-get-blocks-loop.png)
 
-**Download a copy of [minecraft_map.py](code/minecraft_map.py)**
-
 1. Next, add a `while` loop to print the result of `get_blocks` every second:
 
     ```python
@@ -462,6 +460,8 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 1. Run the code and see it update as you walk around.
 
     You will probably find that it's a bit laggy - it takes a small amount of time to retrieve each block ID, and you're trying to do 64 every second.
+    
+**Download a copy of [minecraft_map.py](code/minecraft_map.py)**
 
 ## Reduce the lag with caching
 
