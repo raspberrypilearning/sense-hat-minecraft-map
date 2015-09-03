@@ -4,13 +4,13 @@ Use the Sense HAT to create a map of the world around your player in Minecraft: 
 
 ## Getting started with the Sense HAT's LED display
 
-The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs (light-emitting diodes) you can set to any colour using the Sense HAT Python module, and learn about how colours work.
+The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs (light-emitting diodes): you can set them to any colour using the Sense HAT Python module, and learn about how colours work.
 
 1. Mount the Sense HAT on your Raspberry Pi and boot up the Pi.
 
     ![Mounted Sense HAT](images/mounted-sense-hat.png)
 
-1. Open the Terminal app from the applications menu, under *Accessories*, or from the taskbar:
+1. Open the Terminal app from the applications menu, under **Accessories**, or from the taskbar:
 
     ![Open Python 3](images/python3-app-menu.png)
 
@@ -19,10 +19,9 @@ The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs (light-emitting 
     ```bash
     mkdir minecraft-map
     ```
+    `mkdir` means "make directory"; "directory" is another word for a folder.
 
-    *`mkdir` means "make directory" - which is another word for a folder*
-
-1. Open Python 3 from the applications menu, under *Programming*:
+1. Open Python 3 from the applications menu, under **Programming**:
 
     ![Open Python 3](images/python3-app-menu.png)
 
