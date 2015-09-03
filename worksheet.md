@@ -4,7 +4,7 @@ Use the Sense HAT to create a map of the world around your player in Minecraft: 
 
 ## Getting started with the Sense HAT's LED display
 
-The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs (light-emitting diodes): you can set them to any colour using the Sense HAT Python module, and learn about how colours work.
+The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs (light-emitting diodes): you can set them to any colour using the Sense HAT Python module, and learn about how colour displays work.
 
 1. Mount the Sense HAT on your Raspberry Pi and boot up the Pi.
 
