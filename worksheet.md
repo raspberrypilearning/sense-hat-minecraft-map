@@ -45,15 +45,15 @@ The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs (light-emitting 
 
     **How does it work?**
 
-    - `from sense_hat import SenseHat` - this lets you use the Sense HAT module
-    - `sense = SenseHat()` - this creates a connection to the Sense HAT hardware, called `sense`
-    - `sense.clear(255, 0, 0)` - here we call the `clear` method (function) on the `sense` object and pass in three colour values - for red, green and blue
+    - `from sense_hat import SenseHat`: this lets you use the Sense HAT module
+    - `sense = SenseHat()`: this creates a connection to the Sense HAT hardware, called `sense`
+    - `sense.clear(255, 0, 0)`: here we call the `clear` method (function) on the `sense` object and pass in three colour values, for red, green and blue
 
     **How do colours work?**
 
-    - All colours are made up of a red value, a green value and a blue value - like mixing colour paints to make a different colour
+    - All colours are made up of a red value, a green value, and a blue value: this like mixing coloured paints to make a different colour
     - Colour values go from `0` (none) to `255` (full)
-    - Here we used `(255, 0, 0)` - which is full red, no green and no blue
+    - Here we used `(255, 0, 0)`, which is full red, no green and no blue
     - Similarly, `(0, 255, 0)` is full green and `(0, 0, 255)` is full blue
     - Purple is a mix of blue and red, so `(255, 0, 255)` is purple
 
@@ -69,16 +69,16 @@ The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs (light-emitting 
     - What colour does full red, green and blue `(255, 255, 255)` make?
     - What colour does `(0, 0, 0)` make?
     - What happens if you call `sense.clear()` without any colour values?
-
-    *Inside each of the Sense HAT's 64 LEDs are three smaller LEDs - a red, a green and a blue. All you're doing is setting the brightness of each one and it gives the whole LED a different colour*
+    
+    Inside each of the Sense HAT's 64 LEDs are three smaller LEDs: a red, a green, and a blue. All you're doing is setting the brightness of each one and it gives the whole LED a different colour.
 
 **Download a copy of [colour.py](code/colour.py)**
 
 ## Exploring the Minecraft world
 
-Now you've had a go at setting the colours of the Sense HAT LED matrix, let's open up Minecraft, have a look around and see what block types you can identify.
+Now you've had a go at setting the colours of the Sense HAT LED matrix, let's open up Minecraft and have a look around to see what block types you can identify.
 
-1. Open Minecraft from the application menu, under *Games*:
+1. Open Minecraft from the application menu, under **Games**:
 
     ![Open Minecraft](images/minecraft-app-menu.png)
 
@@ -88,7 +88,7 @@ Now you've had a go at setting the colours of the Sense HAT LED matrix, let's op
 
 1. Return to the Python windows. Open another new window from the Python shell and save it as `minecraft-colours.py` in the same project folder.
 
-1. Move this window so it's on the other side of the screen so you can see the Python window and the Minecraft window side-by-side.
+1. Move this window so that it is on the other side of the screen, and you can see the Python window and the Minecraft window side by side.
 
 1. Enter the following code to get started:
 
@@ -120,9 +120,7 @@ Now you've had a go at setting the colours of the Sense HAT LED matrix, let's op
 
 1. Save and run the code.
 
-    You should now see numbers being constantly printed to the Python shell. These numbers represent the IDs of the block your player is standing on. Walk around over different terrain and you'll see the number change.
-
-    *Note: use the WASD keys to walk around, and space to jump or fly*
+    You should now see numbers being constantly printed to the Python shell. These numbers represent the IDs of the block your player is standing on. Walk around over different terrain and you'll see the number change. Note that you use the WASD keys to walk around, and the space bar to jump or fly
 
     **How does it work?**
 
