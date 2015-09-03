@@ -4,11 +4,11 @@ Use the Sense HAT to create a map of the world around your player in Minecraft: 
 
 ![Sense HAT Minecraft Map](cover.png)
 
-Explore the Sense HAT's LED matrix using its Python library and look at the block types and colours in the world of Minecraft Pi and learn to make a map of Minecraft on your Sense HAT.
+Explore the Sense HAT's LED matrix using its Python library, look at the block types and colours in the world of Minecraft Pi, and learn to make a map of Minecraft on your Sense HAT.
 
 ## Requirements
 
-As well as a Raspberry Pi, the usual peripherals and an up-to-date SD card you'll also need:
+As well as a Raspberry Pi, the usual peripherals, and an up-to-date SD card you'll also need:
 
 ### Hardware
 

@@ -2,7 +2,7 @@
 
 Connect your Sense HAT and boot up the Pi.
 
-First update and upgrade your system by entering the following commands into a Terminal window (while connected to the Internet):
+First update and upgrade your system by entering the following commands into a terminal window (while connected to the internet):
 
 ```bash
 sudo apt-get update
