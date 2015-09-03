@@ -4,7 +4,7 @@ Use the Sense HAT to create a map of the world around your player in Minecraft: 
 
 ## Getting started with the Sense HAT's LED display
 
-The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs (light-emitting diodes): you can set them to any colour using the Sense HAT Python module, and learn about how colour displays work.
+The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs (light-emitting diodes): you can set them to any colour using the Sense HAT Python module, and learn about how colour displays in electronic systems work.
 
 1. Mount the Sense HAT on your Raspberry Pi and boot up the Pi.
 
@@ -49,9 +49,9 @@ The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs (light-emitting 
     - `sense = SenseHat()`: this creates a connection to the Sense HAT hardware, called `sense`
     - `sense.clear(255, 0, 0)`: here we call the `clear` method (function) on the `sense` object and pass in three colour values, for red, green and blue
 
-    **How do colours work?**
+    **How do colour displays work?**
 
-    - All colours are made up of a red value, a green value, and a blue value: this like mixing coloured paints to make a different colour
+    - All colours displayed in electronic systems are made up of a red value, a green value, and a blue value which can be combined to give a wide range of colour, a bit like mixing coloured paints.
     - Colour values go from `0` (none) to `255` (full)
     - Here we used `(255, 0, 0)`, which is full red, no green and no blue
     - Similarly, `(0, 255, 0)` is full green and `(0, 0, 255)` is full blue
