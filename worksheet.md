@@ -197,8 +197,7 @@ Now you've explored the Minecraft world and seen the different block IDs that ar
         print(colour)
         sleep(0.1)
     ```
-
-    *Here we're looking up the ID of the block the player is standing on, as before, and then looking that up in the `colours` dictionary, then printing out the colour code tuple.*
+    Here we're looking up the ID of the block the player is standing on, as before, and then looking that up in the `colours` dictionary, then printing out the colour code tuple.
 
 1. Save and run the code, and walk around the Minecraft world.
 
@@ -207,8 +206,7 @@ Now you've explored the Minecraft world and seen the different block IDs that ar
 1. If you walk over a block that's not in the dictionary you'll get an error. If you haven't found another block type yet, just jump in the air using the space bar, and you'll get this error:
 
     ![Dictionary KeyError](images/dictionary-keyerror.png)
-
-    *This error is a `KeyError`, which is a Python exception meaning you tried to look up the value of a key that isn't in the dictionary, like trying to get the telephone number of a name you haven't got recorded.*
+    This error is a `KeyError`, which is a Python exception meaning you tried to look up the value of a key that isn't in the dictionary, like trying to get the telephone number of a name you haven't got recorded.
 
 1. First of all, let's deal with the `KeyError`. Modify your colour lookup like so:
 
