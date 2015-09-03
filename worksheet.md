@@ -51,7 +51,7 @@ The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs which you can se
 
     **How do colour displays work?**
 
-    - All colours displayed in electronic systems are made up of a red value, a green value, and a blue value which can be combined to give a wide range of colour, a bit like mixing coloured paints.
+    - All colours displayed in electronic systems are made up of a red value, a green value, and a blue value which can be combined to give a wide range of colours, a bit like mixing coloured paints.
     - Colour values go from `0` (none) to `255` (full)
     - Here we used `(255, 0, 0)`, which is full red, no green and no blue
     - Similarly, `(0, 255, 0)` is full green and `(0, 0, 255)` is full blue
