@@ -142,7 +142,7 @@ Now you've had a go at setting the colours of the Sense HAT LED matrix, let's op
     Ice:  79
     ```
 
-    See which ones you can identify while walking around the Minecraft world.
+    See which block types you can identify while walking around the Minecraft world.
 
 ## Minecraft Sense HAT Colour Walk
 
@@ -371,13 +371,13 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
     **What does it do?**
 
-    - `blocks = []` - creates a new empty list
-    - `x, y, z = mc.player.getTilePos()` - get the player's position
-    - `y -= 1` - subtract one from the `y` coordinate to look at the level below the player
-    - `for dx in range(x+8):` - use `x` values from 3 left of the player over to (not including) 5 to the right (8 rows in total)
-    - `block = mc.getBlock(dx, y, z)` - look up the block at this location
-    - `blocks.append(block)` - add this block to the list
-    - `return blocks` - by the time the program gets to this line, this contains 4 blocks as it's been through the loop 4 times
+    - `blocks = []`: creates a new empty list
+    - `x, y, z = mc.player.getTilePos()`: get the player's position
+    - `y -= 1`: subtract one from the `y` coordinate to look at the level below the player
+    - `for dx in range(x+8):`: use `x` values from 3 left of the player over to (not including) 5 to the right (8 rows in total)
+    - `block = mc.getBlock(dx, y, z)`: look up the block at this location
+    - `blocks.append(block)`: add this block to the list
+    - `return blocks`: by the time the program gets to this line, this contains 4 blocks as it's been through the loop 4 times
 
 1. Add a line to the end of your code to print out the result of the `get_blocks` function:
 
@@ -385,7 +385,7 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
     print(get_blocks())
     ```
 
-1. Run the code and you should see a list of 4 numbers (block IDs), which will be the block you are standing on and the three blocks to the side of you (the direction depends on which way you're facing).
+1. Run the code and you should see a list of four numbers (block IDs), which will be the block you are standing on and the three blocks to the side of you (the direction depends on which way you're facing).
 
     ![First get_blocks loop](images/first-get-blocks-loop.png)
 
@@ -405,14 +405,14 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
     **What does it do?**
 
-    - `blocks = []` - creates a new empty list
-    - `x, y, z = mc.player.getTilePos()` - get the player's position
-    - `y -= 1` - subtract one from the `y` coordinate to look at the level below the player
-    - `for dx in range(x-3, x+5):` - use `x` values from 3 left of the player over to (not including) 5 to the right (8 rows in total)
-    - `for dz in range(z-3, z+5):` - use `z` values from 3 behind the player up to (not including) 5 ahead (8 columns in total)
-    - `block = mc.getBlock(dx, y, dz)` - look up the block at this location
-    - `blocks.append(block)` - add this block to the list
-    - `return blocks` - by the time the program gets to this line, this contains 16 blocks as it's been through each loop 4 times
+    - `blocks = []`: creates a new empty list
+    - `x, y, z = mc.player.getTilePos()`: get the player's position
+    - `y -= 1`: subtract one from the `y` coordinate to look at the level below the player
+    - `for dx in range(x-3, x+5):`: use `x` values from 3 left of the player over to (not including) 5 to the right (8 rows in total)
+    - `for dz in range(z-3, z+5):`: use `z` values from 3 behind the player up to (not including) 5 ahead (8 columns in total)
+    - `block = mc.getBlock(dx, y, dz)`: look up the block at this location
+    - `blocks.append(block)`: add this block to the list
+    - `return blocks`: by the time the program gets to this line, this contains 16 blocks as it's been through each loop 4 times
 
 1. Run the code and you should see a list of 16 block IDs, starting with the block you're standing on and the 7 to the side of you, followed by each row of 8 blocks away from you:
 
@@ -434,8 +434,8 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
     **What does it do?**
 
-    - `for dx in range(x-3, x+5):` - use `x` values from 3 left of the player over to 5 to the right (8 rows in total)
-    - `for dz in range(z-3, z+5):` - use `z` values from 3 behind the player up to 5 ahead (8 columns in total)
+    - `for dx in range(x-3, x+5):`: use `x` values from 3 left of the player over to 5 to the right (8 rows in total)
+    - `for dz in range(z-3, z+5):`: use `z` values from 3 behind the player up to 5 ahead (8 columns in total)
     - `return blocks` - by the time the program gets to this line, this contains 64 blocks as it's been through each loop 8 times
 
 1. Run the code and you should see a list of 64 block IDs. This time they should be the 8x8 grid of blocks surrounding your player, with you in the middle (there's no centre point of an 8x8 grid so you're just off-centre):
@@ -452,13 +452,13 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
 1. Run the code and see it update as you walk around.
 
-    You will probably find that it's a bit laggy - it takes a small amount of time to retrieve each block ID, and you're trying to do 64 every second.
+    You will probably find that it's a bit laggy: it takes a small amount of time to retrieve each block ID, and you're trying to do 64 every second.
     
 **Download a copy of [minecraft_map.py](code/minecraft_map.py)**
 
 ## Reduce the lag with caching
 
-In order to reduce the lag, you'll need to use a technique called *caching*. This means you record a value the first time you look it up, and refer to the saved value when you need it the next time, rather than look it up again. To do this, you're going to use a dictionary to store the known blocks. That way, you can look up a set of coordinates in the `known_blocks` dictionary, and only use `mc.getBlock()` if you need to - this will save lots of time and make your lookup run much faster.
+In order to reduce the lag, you'll need to use a technique called caching. This means you record a value the first time you look it up, and refer to the saved value when you need it the next time, rather than look it up again. To do this, you're going to use a dictionary to store the known blocks. That way, you can look up a set of coordinates in the `known_blocks` dictionary, and only use `mc.getBlock()` if you need to - this will save lots of time and make your lookup run much faster.
 
 1. First, create an empty dictionary called `known_blocks` before your `get_blocks` function:
 
@@ -472,8 +472,7 @@ In order to reduce the lag, you'll need to use a technique called *caching*. Thi
     def get_blocks():
         global known_blocks
     ```
-
-    *Global means you're changing the scope of the variable from being read-only to read/write*
+    Global means you're changing the scope of the variable from being read-only to read/write.
 
 1. Inside the function, modify the loop to look like this:
 
@@ -491,10 +490,10 @@ In order to reduce the lag, you'll need to use a technique called *caching*. Thi
 
     **What does it do?**
 
-    - `b = (dx, dz)` - create a tuple of the current coordinates
-    - `if b in known_blocks` - check if the block has already been looked up
-    - `block = known_blocks[b]` - look up the block by its coordinates
-    - `known_blocks[b] = block` - once a block is looked up for the first time, add it to the `known_blocks` dictionary.
+    - `b = (dx, dz)`: create a tuple of the current coordinates
+    - `if b in known_blocks`: check if the block has already been looked up
+    - `block = known_blocks[b]`: look up the block by its coordinates
+    - `known_blocks[b] = block`: once a block is looked up for the first time, add it to the `known_blocks` dictionary.
 
 1. Run the code and walk around. You should see it's a lot quicker at printing the blocks list out. Try reducing the `sleep` down to `0.1` and see if it can still cope.
 
@@ -555,7 +554,7 @@ Now all that's left to do is create the map. You've already learned how to look 
 
     **How does it work?**
 
-    This function is a one-liner, but it's quite complex. It's using a concept called *list comprehension*, which is a way of building up a list in a loop in a concise way.
+    This function is a one-liner, but it's quite complex. It uses a concept called list comprehension, which is a way of building up a list in a loop in a concise way.
 
     The whole thing is wrapped in square brackets, representing a list, and the definition is to call the `lookup_colour` function for each block in `blocks`. The list builds up as it loops over the list of blocks passed in, and is returned as a list of 64 colours.
 
