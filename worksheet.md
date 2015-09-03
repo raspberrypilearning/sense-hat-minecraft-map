@@ -124,11 +124,11 @@ Now you've had a go at setting the colours of the Sense HAT LED matrix, let's op
 
     **How does it work?**
 
-    - `while True` - this is an infinite loop
-    - `x, y, z = mc.player.getTilePos()` - this gets the coordinates of where your player is standing and sets them to variables `x`, `y` and `z`
-    - `block = mc.getBlock(x, y-1, z)` - this looks up the ID of the block directly beneath the player (`y-1` means one below the player's `y` coordinate, which is the vertical axis)
-    - `print(block)` - this shows us which block ID was returned by `getBlock`
-    - `sleep(0.1)` - this pauses for a tenth of a second each time the loop runs, so it's not printing out too fast
+    - `while True`: this is an infinite loop
+    - `x, y, z = mc.player.getTilePos()`: this gets the coordinates of where your player is standing and sets them to variables `x`, `y` and `z`
+    - `block = mc.getBlock(x, y-1, z)`: this looks up the ID of the block directly beneath the player (`y-1` means one below the player's `y` coordinate, which is the vertical axis)
+    - `print(block)`: this shows us which block ID was returned by `getBlock`
+    - `sleep(0.1)`: this pauses for a tenth of a second each time the loop runs, so it's not printing out too fast
 
 1. You need to know the block types that are represented by the IDs you're seeing. Some common ones are:
 
@@ -148,7 +148,7 @@ Now you've had a go at setting the colours of the Sense HAT LED matrix, let's op
 
 Now you've explored the Minecraft world and seen the different block IDs that are printed out as you walk around, you're going to learn to make the Sense HAT show a different colour depending on what type of block you're standing on in the Minecraft world!
 
-1. Next, you're going need a way creating a mapping from a block ID to a colour; for example grass should map to green, so block ID `2` should map to the colour code `(0, 255, 0)`.
+1. You're going need a way to create a mapping from a block ID to a colour; for example grass should map to green, so block ID `2` should map to the colour code `(0, 255, 0)`.
 
     Start by adding some variables to identify block IDs. Add the following code above your `while` loop like so:
 
@@ -158,8 +158,8 @@ Now you've explored the Minecraft world and seen the different block IDs that ar
     water = 9
     sand = 12
     ```
-
-    *The first line is a comment helping explain what that bit of code is for. These variables are all integers (whole numbers) because that's what block IDs are represented by.*
+    
+    The first line is a comment helping explain what that bit of code is for. These variables are all integers (whole numbers) because that's what block IDs are represented by.
 
 1. Below that, add the colours that represent these block types:
 
@@ -169,8 +169,7 @@ Now you've explored the Minecraft world and seen the different block IDs that ar
     blue = (0, 0, 255)
     yellow = (255, 255, 0)
     ```
-
-    *These variables are tuples - which is a data type (like integer, string and list) used to store a number of items in a particular order, like `x`, `y` and `z` coordinates or in this case, `R`, `G` and `B` values of a colour. These are 3-tuples because they each contain 3 values.*
+    These variables are tuples - which is a data type (like integer, string and list) used to store a number of items in a particular order, like `x`, `y` and `z` coordinates or in this case, `R`, `G` and `B` values of a colour. These are 3-tuples because they each contain 3 values.
 
 1. Next, below the colours, create a dictionary mapping each of the block types to a particular colour:
 
@@ -182,8 +181,7 @@ Now you've explored the Minecraft world and seen the different block IDs that ar
         sand: yellow,
     }
     ```
-
-    *A dictionary is a data type used for storing relations between two objects, like an address book mapping a name to a telephone number. The items in the dictionary are referred to as key-value pairs, so in an address book the name is the "key" and the phone number is the "value". In our case the block type is the "key" and the colour is the "value".*
+    A dictionary is a data type used for storing relations between two objects, like an address book mapping a name to a telephone number. The items in the dictionary are referred to as key-value pairs, so in an address book the name is the "key" and the phone number is the "value". In our case the block type is the "key" and the colour is the "value".
 
 1. Now all that's left to do is to look up the block you're standing on, see which colour it should be, and use `sense.clear` to change the colour of the Sense HAT display acdordingly!
 
