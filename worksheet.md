@@ -41,21 +41,21 @@ The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs which you can se
 
 1. Save with `Ctrl + S` and run with `F5`.
 
-    Your Sense HAT LEDs should now be all red!
+    Your Sense HAT LEDs should now all be red!
 
     **How does it work?**
 
-    - `from sense_hat import SenseHat`: this lets you use the Sense HAT module
-    - `sense = SenseHat()`: this creates a connection to the Sense HAT hardware, called `sense`
-    - `sense.clear(255, 0, 0)`: here we call the `clear` method (function) on the `sense` object and pass in three colour values, for red, green and blue
+    - `from sense_hat import SenseHat`: this lets you use the Sense HAT module.
+    - `sense = SenseHat()`: this creates a connection to the Sense HAT hardware, called `sense`.
+    - `sense.clear(255, 0, 0)`: here we call the `clear` method (function) on the `sense` object and pass in three colour values, for red, green and blue.
 
     **How do colour displays work?**
 
     - All colours displayed in electronic systems are made up of a red value, a green value, and a blue value which can be combined to give a wide range of colours, a bit like mixing coloured paints.
-    - Colour values go from `0` (none) to `255` (full)
-    - Here we used `(255, 0, 0)`, which is full red, no green and no blue
-    - Similarly, `(0, 255, 0)` is full green and `(0, 0, 255)` is full blue
-    - Purple is a mix of blue and red, so `(255, 0, 255)` is purple
+    - Colour values go from `0` (none) to `255` (full).
+    - Here we used `(255, 0, 0)`, which is full red, no green and no blue.
+    - Similarly, `(0, 255, 0)` is full green and `(0, 0, 255)` is full blue.
+    - Purple is a mix of blue and red, so `(255, 0, 255)` is purple.
 
 1. Try changing the colour to:
 
@@ -124,11 +124,11 @@ Now you've had a go at setting the colours of the Sense HAT LED matrix, let's op
 
     **How does it work?**
 
-    - `while True`: this is an infinite loop
-    - `x, y, z = mc.player.getTilePos()`: this gets the coordinates of where your player is standing and sets them to variables `x`, `y` and `z`
-    - `block = mc.getBlock(x, y-1, z)`: this looks up the ID of the block directly beneath the player (`y-1` means one below the player's `y` coordinate, which is the vertical axis)
-    - `print(block)`: this shows us which block ID was returned by `getBlock`
-    - `sleep(0.1)`: this pauses for a tenth of a second each time the loop runs, so it's not printing out too fast
+    - `while True`: this is an infinite loop.
+    - `x, y, z = mc.player.getTilePos()`: this gets the coordinates of where your player is standing and sets them to variables `x`, `y` and `z`.
+    - `block = mc.getBlock(x, y-1, z)`: this looks up the ID of the block directly beneath the player (`y-1` means one below the player's `y` coordinate, which is the vertical axis).
+    - `print(block)`: this shows us which block ID was returned by `getBlock`.
+    - `sleep(0.1)`: this pauses for a tenth of a second each time the loop runs, so it's not printing out too fast.
 
 1. You need to know the block types that are represented by the IDs you're seeing. Some common ones are:
 
@@ -169,7 +169,7 @@ Now you've explored the Minecraft world and seen the different block IDs that ar
     blue = (0, 0, 255)
     yellow = (255, 255, 0)
     ```
-    These variables are tuples. A tuple is a data type (like integer, string and list) used to store a number of items in a particular order, like `x`, `y` and `z` coordinates or in this case, `R`, `G` and `B` values of a colour. These are 3-tuples because they each contain 3 values.
+    These variables are tuples. A tuple is a data type (like integer, string, and list) used to store a number of items in a particular order, like `x`, `y` and `z` coordinates or in this case, `R`, `G` and `B` values of a colour. These are 3-tuples because they each contain 3 values.
 
 1. Next, below the colours, create a dictionary mapping each of the block types to a particular colour:
 
@@ -282,7 +282,7 @@ Until now, all you've done is set the whole Sense HAT LED display to the same co
 
     **Things to try:**
 
-    - What happens when you reverse the order of the loops? `for x in range(8)` then `for y in range(8)`
+    - What happens when you reverse the order of the loops? Try `for x in range(8)` then `for y in range(8)`.
     - What happens if you add a `sense.clear()` before `sense.set_pixel()`?
     - What happens if you try `range(8, -1, -1)`?
 
@@ -372,13 +372,13 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
     **What does it do?**
 
-    - `blocks = []`: creates a new empty list
-    - `x, y, z = mc.player.getTilePos()`: get the player's position
-    - `y -= 1`: subtract one from the `y` coordinate to look at the level below the player
-    - `for dx in range(x+8):`: use `x` values from 3 left of the player over to (not including) 5 to the right (8 rows in total)
-    - `block = mc.getBlock(dx, y, z)`: look up the block at this location
-    - `blocks.append(block)`: add this block to the list
-    - `return blocks`: by the time the program gets to this line, this contains 4 blocks as it's been through the loop 4 times
+    - `blocks = []`: creates a new empty list.
+    - `x, y, z = mc.player.getTilePos()`: get the player's position.
+    - `y -= 1`: subtract one from the `y` coordinate to look at the level below the player.
+    - `for dx in range(x+8):`: use `x` values from 3 left of the player over to (not including) 5 to the right (8 rows in total).
+    - `block = mc.getBlock(dx, y, z)`: look up the block at this location.
+    - `blocks.append(block)`: add this block to the list.
+    - `return blocks`: by the time the program gets to this line, this contains 4 blocks as it's been through the loop 4 times.
 
 1. Add a line to the end of your code to print out the result of the `get_blocks` function:
 
@@ -406,14 +406,14 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
     **What does it do?**
 
-    - `blocks = []`: creates a new empty list
-    - `x, y, z = mc.player.getTilePos()`: get the player's position
-    - `y -= 1`: subtract one from the `y` coordinate to look at the level below the player
-    - `for dx in range(x-3, x+5):`: use `x` values from 3 left of the player over to (not including) 5 to the right (8 rows in total)
-    - `for dz in range(z-3, z+5):`: use `z` values from 3 behind the player up to (not including) 5 ahead (8 columns in total)
-    - `block = mc.getBlock(dx, y, dz)`: look up the block at this location
-    - `blocks.append(block)`: add this block to the list
-    - `return blocks`: by the time the program gets to this line, this contains 16 blocks as it's been through each loop 4 times
+    - `blocks = []`: creates a new empty list.
+    - `x, y, z = mc.player.getTilePos()`: get the player's position.
+    - `y -= 1`: subtract one from the `y` coordinate to look at the level below the player.
+    - `for dx in range(x-3, x+5):`: use `x` values from 3 left of the player over to (not including) 5 to the right (8 rows in total).
+    - `for dz in range(z-3, z+5):`: use `z` values from 3 behind the player up to (not including) 5 ahead (8 columns in total).
+    - `block = mc.getBlock(dx, y, dz)`: look up the block at this location.
+    - `blocks.append(block)`: add this block to the list.
+    - `return blocks`: by the time the program gets to this line, this contains 16 blocks as it's been through each loop 4 times.
 
 1. Run the code and you should see a list of 16 block IDs, starting with the block you're standing on and the 7 to the side of you, followed by each row of 8 blocks away from you:
 
@@ -435,9 +435,9 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
     **What does it do?**
 
-    - `for dx in range(x-3, x+5):`: use `x` values from 3 left of the player over to 5 to the right (8 rows in total)
-    - `for dz in range(z-3, z+5):`: use `z` values from 3 behind the player up to 5 ahead (8 columns in total)
-    - `return blocks` - by the time the program gets to this line, this contains 64 blocks as it's been through each loop 8 times
+    - `for dx in range(x-3, x+5):`: use `x` values from 3 left of the player over to 5 to the right (8 rows in total).
+    - `for dz in range(z-3, z+5):`: use `z` values from 3 behind the player up to 5 ahead (8 columns in total).
+    - `return blocks` - by the time the program gets to this line, this contains 64 blocks as it's been through each loop 8 times.
 
 1. Run the code and you should see a list of 64 block IDs. This time they should be the 8x8 grid of blocks surrounding your player, with you in the middle (there's no centre point of an 8x8 grid so you're just off-centre):
 
@@ -491,9 +491,9 @@ In order to reduce the lag, you'll need to use a technique called caching. This 
 
     **What does it do?**
 
-    - `b = (dx, dz)`: create a tuple of the current coordinates
-    - `if b in known_blocks`: check if the block has already been looked up
-    - `block = known_blocks[b]`: look up the block by its coordinates
+    - `b = (dx, dz)`: create a tuple of the current coordinates.
+    - `if b in known_blocks`: check if the block has already been looked up.
+    - `block = known_blocks[b]`: look up the block by its coordinates.
     - `known_blocks[b] = block`: once a block is looked up for the first time, add it to the `known_blocks` dictionary.
 
 1. Run the code and walk around. You should see it's a lot quicker at printing the blocks list out. Try reducing the `sleep` down to `0.1` and see if it can still cope.
@@ -544,7 +544,7 @@ Now all that's left to do is create the map. You've already learned how to look 
         print(pixels)
     ```
 
-    Here we get the blocks from the `get_blocks` function which looks them up in the cached `known_blocks` dictionary or uses `mc.getBlock` to find them out. Then we try to convert these block IDs into colours - but that's currently a missing piece!
+    Here we get the blocks from the `get_blocks` function which looks them up in the cached `known_blocks` dictionary or uses `mc.getBlock` to find them out. Then we try to convert these block IDs into colours, but that's currently a missing piece!
 
 1. Now you'll need a `map_blocks_to_colours` function which takes a list of block IDs and returns a list of corresponding colours. Add this after your `get_blocks` function:
 
