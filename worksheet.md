@@ -148,7 +148,7 @@ Now you've had a go at setting the colours of the Sense HAT LED matrix, let's op
 
 Now you've explored the Minecraft world and seen the different block IDs that are printed out as you walk around, you're going to learn to make the Sense HAT show a different colour depending on what type of block you're standing on in the Minecraft world!
 
-1. You're going need a way to create a mapping from a block ID to a colour; for example grass should map to green, so block ID `2` should map to the colour code `(0, 255, 0)`.
+1. You're going need a way to create a mapping from a block ID to a colour; for example, grass should map to green, so block ID `2` should map to the colour code `(0, 255, 0)`.
 
     Start by adding some variables to identify block IDs. Add the following code above your `while` loop like so:
 
@@ -169,7 +169,7 @@ Now you've explored the Minecraft world and seen the different block IDs that ar
     blue = (0, 0, 255)
     yellow = (255, 255, 0)
     ```
-    These variables are tuples. A tuple is a data type (like integer, string, and list) used to store a number of items in a particular order, like `x`, `y` and `z` coordinates or in this case, `R`, `G` and `B` values of a colour. These are 3-tuples because they each contain 3 values.
+    These variables are tuples. A tuple is a data type (like an integer, string, or list) used to store a number of items in a particular order. These could be the `x`, `y` and `z` coordinates or, as in this case, the `R`, `G` and `B` values of a colour. These are 3-tuples because they each contain 3 values.
 
 1. Next, below the colours, create a dictionary mapping each of the block types to a particular colour:
 
@@ -183,7 +183,7 @@ Now you've explored the Minecraft world and seen the different block IDs that ar
     ```
     A dictionary is a data type used for storing relations between two objects, like an address book mapping a name to a telephone number. The items in the dictionary are referred to as key-value pairs, so in an address book the name is the "key" and the phone number is the "value". In our case the block type is the "key" and the colour is the "value".
 
-1. Now all that's left to do is to look up the block you're standing on, see which colour it should be, and use `sense.clear` to change the colour of the Sense HAT display acdordingly!
+1. Now all that's left to do is to look up the block you're standing on, see which colour it should be, and use `sense.clear` to change the colour of the Sense HAT display accordingly!
 
     To look up a value in a dictionary, you pass in the key. If the dictionary was an address book, you'd pass in the name and be given that person's phone number. So to look up the block type `grass` you'd use `colours[2]` or `colours[grass]` and you'd get back the value for green which is `(0, 255, 0)`.
 
@@ -203,11 +203,11 @@ Now you've explored the Minecraft world and seen the different block IDs that ar
 
     You should see the colour code of the block you're standing on. Walk around to see different colour codes. When you walk on grass you should see `(0, 255, 0)`, when you're on sand you should see `(255, 255, 0)`, and on water, `(0, 0, 255)`.
 
-1. If you walk over a block that's not in the dictionary you'll get an error. If you haven't found another block type yet, just jump in the air using the space bar, and you'll get this error:
+1. If you walk over a block that isn't in the dictionary, you'll get an error message. If you haven't found another block type yet, just jump in the air using the space bar, and you'll get this error:
 
     ![Dictionary KeyError](images/dictionary-keyerror.png)
     
-    This error is a `KeyError`, which is a Python exception meaning you tried to look up the value of a key that isn't in the dictionary, like trying to get the telephone number of a name you haven't got recorded.
+    This error is a `KeyError`, which is a Python exception meaning you tried to look up the value of a key which isn't in the dictionary, like trying to get the telephone number of a name you haven't got recorded.
 
 1. First of all, let's deal with the `KeyError`. Modify your colour lookup like so:
 
@@ -459,7 +459,7 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
 ## Reduce the lag with caching
 
-In order to reduce the lag, you'll need to use a technique called caching. This means you record a value the first time you look it up, and refer to the saved value when you need it the next time, rather than look it up again. To do this, you're going to use a dictionary to store the known blocks. That way, you can look up a set of coordinates in the `known_blocks` dictionary, and only use `mc.getBlock()` if you need to - this will save lots of time and make your lookup run much faster.
+In order to reduce the lag, you'll need to use a technique called caching. This means you record a value the first time you look it up, and refer to the saved value when you need it the next time, rather than look it up again. To do this, you're going to use a dictionary to store the known blocks. That way, you can look up a set of coordinates in the `known_blocks` dictionary, and only use `mc.getBlock()` if you need to. This will save lots of time and make your lookup run much faster.
 
 1. First, create an empty dictionary called `known_blocks` before your `get_blocks` function:
 
@@ -561,7 +561,7 @@ Now all that's left to do is create the map. You've already learned how to look 
 
     However, we don't have a `lookup_colour` function yet either!
 
-1. Next you'll need to create a new `lookup_colour` function that takes a block and returns a colour. You could just use `colours[block]` but that will fail if you try to look up a colour you haven't designated a colour.
+1. Next you'll need to create a new `lookup_colour` function that takes a block and returns a colour. You could just use `colours[block]` but that will fail if you try to look up a colour which you haven't yet set in your directory.
 
     Here's a function that will return white if the block does not have a colour set:
 
