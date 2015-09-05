@@ -244,6 +244,7 @@ Until now, all you've done is set the whole Sense HAT LED display to the same co
 
     ```python
     from sense_hat import SenseHat
+    from time import sleep
 
     sense  = SenseHat()
 
