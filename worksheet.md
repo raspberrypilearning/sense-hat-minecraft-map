@@ -595,7 +595,7 @@ Now all that's left to do is create the map. You've already learned how to look 
 
     This should now show a map of a small part of the Minecraft world around you. Walk around and watch it update!
 
-    ![Sense HAT Minecraft Map](images/sense-hat-minecraft-map.png)
+    ![Sense HAT Minecraft Map](images/sense-hat-minecraft-map.jpg)
 
 **Download a copy of [minecraft_map.py](code/minecraft_map.py)**
 
