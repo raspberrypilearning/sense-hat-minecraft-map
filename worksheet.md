@@ -8,17 +8,18 @@ The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs which you can se
 
 1. Mount the Sense HAT on your Raspberry Pi and boot up the Pi.
 
-    ![Mounted Sense HAT](images/mounted-sense-hat.png)
+    ![Mounting the Sense HAT](images/mount-sense-hat.png)
 
 1. Open the Terminal app from the applications menu, under **Accessories**, or from the taskbar:
 
-    ![Open Python 3](images/python3-app-menu.png)
+    ![Open Terminal](images/terminal-app-menu.png)
 
 1. Create a new directory for your project by entering the following command:
 
     ```bash
     mkdir minecraft-map
     ```
+
     `mkdir` means "make directory"; "directory" is another word for a folder.
 
 1. Open Python 3 from the applications menu, under **Programming**:
@@ -69,7 +70,7 @@ The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs which you can se
     - What colour does full red, green and blue `(255, 255, 255)` make?
     - What colour does `(0, 0, 0)` make?
     - What happens if you call `sense.clear()` without any colour values?
-    
+
     Inside each of the Sense HAT's 64 LEDs are three smaller LEDs: a red, a green, and a blue. All you're doing is setting the brightness of each one and it gives the whole LED a different colour.
 
 **Download a copy of [colour.py](code/colour.py)**
@@ -158,7 +159,7 @@ Now you've explored the Minecraft world and seen the different block IDs that ar
     water = 9
     sand = 12
     ```
-    
+
     The first line is a comment helping explain what that bit of code is for. These variables are all integers (whole numbers) because that's what block IDs are represented by.
 
 1. Below that, add the colours that represent these block types:
@@ -206,7 +207,7 @@ Now you've explored the Minecraft world and seen the different block IDs that ar
 1. If you walk over a block that isn't in the dictionary, you'll get an error message. If you haven't found another block type yet, just jump in the air using the space bar, and you'll get this error:
 
     ![Dictionary KeyError](images/dictionary-keyerror.png)
-    
+
     This error is a `KeyError`, which is a Python exception meaning you tried to look up the value of a key which isn't in the dictionary, like trying to get the telephone number of a name you haven't got recorded.
 
 1. First of all, let's deal with the `KeyError`. Modify your colour lookup like so:
@@ -356,7 +357,7 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
 1. Now you'll need to implement your `get_blocks` function. It would be nice to have a generic `get_blocks` function for any given range of `x`, `y` and `z` returning a cuboid of block IDs but for our purposes this is unnecessary as all we need is an 8x8 grid on the same y-axis.
 
-    What we want is to loop over 8 `x` coordinates and 8 `z` coordinates with the same `y` coordinate.
+    Starting with a simple version, we want a
 
     Enter the following code into your function:
 
@@ -365,7 +366,7 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
         blocks = []
         x, y, z = mc.player.getTilePos()
         y -= 1
-        for dx in range(x+4):
+        for dx in range(x, x+4):
             block = mc.getBlock(dx, y, z)
             blocks.append(block)
         return blocks
@@ -376,7 +377,7 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
     - `blocks = []`: creates a new empty list.
     - `x, y, z = mc.player.getTilePos()`: get the player's position.
     - `y -= 1`: subtract one from the `y` coordinate to look at the level below the player.
-    - `for dx in range(x+8):`: use `x` values from 3 left of the player over to (not including) 5 to the right (8 rows in total).
+    - `for dx in range(x, x+4):`: use `x` values from the player to 3 blocks away from the player.
     - `block = mc.getBlock(dx, y, z)`: look up the block at this location.
     - `blocks.append(block)`: add this block to the list.
     - `return blocks`: by the time the program gets to this line, this contains 4 blocks as it's been through the loop 4 times.
@@ -398,8 +399,8 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
         blocks = []
         x, y, z = mc.player.getTilePos()
         y -= 1
-        for dx in range(x+4):
-            for dz in range(z+4):
+        for dx in range(x, x+4):
+            for dz in range(z, z+4):
                 block = mc.getBlock(dx, y, dz)
                 blocks.append(block)
         return blocks
@@ -410,8 +411,8 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
     - `blocks = []`: creates a new empty list.
     - `x, y, z = mc.player.getTilePos()`: get the player's position.
     - `y -= 1`: subtract one from the `y` coordinate to look at the level below the player.
-    - `for dx in range(x-3, x+5):`: use `x` values from 3 left of the player over to (not including) 5 to the right (8 rows in total).
-    - `for dz in range(z-3, z+5):`: use `z` values from 3 behind the player up to (not including) 5 ahead (8 columns in total).
+    - `for dx in range(x, x+4):`: use `x` values from the player to 3 blocks away from the player.
+    - `for dx in range(z, z+4):`: use `z` values from the player to 3 blocks away from the player.
     - `block = mc.getBlock(dx, y, dz)`: look up the block at this location.
     - `blocks.append(block)`: add this block to the list.
     - `return blocks`: by the time the program gets to this line, this contains 16 blocks as it's been through each loop 4 times.
@@ -455,7 +456,7 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 1. Run the code and see it update as you walk around.
 
     You will probably find that it's a bit laggy: it takes a small amount of time to retrieve each block ID, and you're trying to do 64 every second.
-    
+
 **Download a copy of [minecraft_map.py](code/minecraft_map.py)**
 
 ## Reduce the lag with caching
@@ -578,7 +579,7 @@ Now all that's left to do is create the map. You've already learned how to look 
 
 1. You'll also need to define the variable `player_pos`. It'll need to be the number between `0` and `63` - the pixel which is the defined centre point of the grid. Since we used the range `x-3` to `x+5` and `z-3` to `z+5` the centre point will be the `(3, 3)` coordinate on the LED matrix, which is pixel number `27` as shown:
 
-    ![](images/sense-hat-grid-centre-point.png)
+    ![Sense HAT grid centre point](images/sense-hat-grid-centre-point.png)
 
 1. Now add a line to your `while` loop to modify the `pixels` list to set a black pixel where your player is standing:
 
