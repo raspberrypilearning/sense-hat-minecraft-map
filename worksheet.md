@@ -26,7 +26,7 @@ The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs which you can se
 
     ![Open Python 3](images/python3-app-menu.png)
 
-1. When the Python shell window opens up, click `File > New File` to open a new window. This is where you'll enter your code.
+1. When the Python shell window opens up, click `File > New Window` to open a new window. This is where you'll enter your code.
 
 1. Save the file as `colours.py` in your new `minecraft-map` folder.
 
