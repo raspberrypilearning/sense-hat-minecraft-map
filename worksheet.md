@@ -457,8 +457,6 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
     You will probably find that it's a bit laggy: it takes a small amount of time to retrieve each block ID, and you're trying to do 64 every second.
 
-**Download a copy of [minecraft_map.py](code/minecraft_map.py)**
-
 ## Reduce the lag with caching
 
 In order to reduce the lag, you'll need to use a technique called caching. This means you record a value the first time you look it up, and refer to the saved value when you need it the next time, rather than look it up again. To do this, you're going to use a dictionary to store the known blocks. That way, you can look up a set of coordinates in the `known_blocks` dictionary, and only use `mc.getBlock()` if you need to. This will save lots of time and make your lookup run much faster.
