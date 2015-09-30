@@ -6,7 +6,7 @@ Use the Sense HAT to create a map of the world around your player in Minecraft: 
 
 The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs which you can set to any colour using the Sense HAT Python module, to learn about how colour displays in electronic systems work.
 
-1. Mount the Sense HAT on your Raspberry Pi and boot up the Pi, referring to the [assembly instructions](https://www.raspberrypi.org/learning/astro-pi-guide/assemble.md) in the Sense HAT guide if neccessary. 
+1. Mount the Sense HAT on your Raspberry Pi and boot up the Pi, referring to the [assembly instructions](https://www.raspberrypi.org/learning/astro-pi-guide/assemble.md) in the Sense HAT guide if neccessary.
 
 1. Open the Terminal app from the applications menu, under **Accessories**, or from the taskbar:
 
@@ -335,7 +335,7 @@ Now you have your Sense HAT showing the colour of the block you're standing on, 
 
 In order to make an 8x8 map, you'll need to retrieve the block IDs for all blocks immediately surrounding your player - enough to fill the 8x8 display. The Minecraft API does have an `mc.getBlocks()` function, but unfortunately it doesn't actually work, so you'll have to write your own function.
 
-1. Create a new Python file and save it as minecraft-map.py.
+1. Create a new Python file and save it as `minecraft-map.py`.
 
 1. Start by writing the following starter code:
 
@@ -480,7 +480,7 @@ In order to reduce the lag, you'll need to use a technique called caching. This 
     ```python
     for dx in range(x-3, x+5):
         for dz in range(z-3, z+5):
-            b = (dx, dz)
+            b = (dx, y, dz)
             if b in known_blocks:
                 block = known_blocks[b]
             else:
@@ -491,7 +491,7 @@ In order to reduce the lag, you'll need to use a technique called caching. This 
 
     **What does it do?**
 
-    - `b = (dx, dz)`: create a tuple of the current coordinates.
+    - `b = (dx, y, dz)`: create a 3-tuple of the current coordinates.
     - `if b in known_blocks`: check if the block has already been looked up.
     - `block = known_blocks[b]`: look up the block by its coordinates.
     - `known_blocks[b] = block`: once a block is looked up for the first time, add it to the `known_blocks` dictionary.
@@ -578,7 +578,7 @@ Now all that's left to do is create the map. You've already learned how to look 
 1. You'll also need to define the variable `player_pos`. It'll need to be the number between `0` and `63` - the pixel which is the defined centre point of the grid. Since we used the range `x-3` to `x+5` and `z-3` to `z+5` the centre point will be the `(3, 3)` coordinate on the LED matrix, which is pixel number `27` as shown:
 
     ![Sense HAT grid centre point](images/sense-hat-grid-centre-point.png)
-    
+
     Add the line `player_pos = 27` before your `while` loop.
 
 1. Now add a line to your `while` loop to modify the `pixels` list to set a black pixel where your player is standing:
@@ -586,17 +586,15 @@ Now all that's left to do is create the map. You've already learned how to look 
     ```python
     pixels[player_pos] = black
     ```
-    
-
 
 1. Everything's set up now and the last thing to do is send the list of pixels to the Sense HAT. Swap out the `print` line for a `set_pixels` one:
 
     ```python
     sense.set_pixels(pixels)
     ```
-    
+
     Your `while` should now look like this:
-    
+
     ```python
     while True:
         blocks = get_blocks()
