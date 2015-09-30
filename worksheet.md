@@ -599,10 +599,10 @@ Now all that's left to do is create the map. You've already learned how to look 
     
     ```python
     while True:
-    blocks = get_blocks()
-    pixels = map_blocks_to_colours(blocks)
-    pixels[player_pos] = black
-    sense.set_pixels(pixels)
+        blocks = get_blocks()
+        pixels = map_blocks_to_colours(blocks)
+        pixels[player_pos] = black
+        sense.set_pixels(pixels)
     ```
 
     This should now show a map of a small part of the Minecraft world around you. Walk around and watch it update!
