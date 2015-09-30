@@ -335,7 +335,9 @@ Now you have your Sense HAT showing the colour of the block you're standing on, 
 
 In order to make an 8x8 map, you'll need to retrieve the block IDs for all blocks immediately surrounding your player - enough to fill the 8x8 display. The Minecraft API does have an `mc.getBlocks()` function, but unfortunately it doesn't actually work, so you'll have to write your own function.
 
-1. Start by writing the following boilerplate code:
+1. Create a new Python file and save it as minecraft-map.py.
+
+1. Start by writing the following starter code:
 
     ```python
     from sense_hat import SenseHat
@@ -576,16 +578,30 @@ Now all that's left to do is create the map. You've already learned how to look 
 1. You'll also need to define the variable `player_pos`. It'll need to be the number between `0` and `63` - the pixel which is the defined centre point of the grid. Since we used the range `x-3` to `x+5` and `z-3` to `z+5` the centre point will be the `(3, 3)` coordinate on the LED matrix, which is pixel number `27` as shown:
 
     ![Sense HAT grid centre point](images/sense-hat-grid-centre-point.png)
+    
+    Add the line `player_pos = 27` before your `while` loop.
 
 1. Now add a line to your `while` loop to modify the `pixels` list to set a black pixel where your player is standing:
 
     ```python
     pixels[player_pos] = black
     ```
+    
+
 
 1. Everything's set up now and the last thing to do is send the list of pixels to the Sense HAT. Swap out the `print` line for a `set_pixels` one:
 
     ```python
+    sense.set_pixels(pixels)
+    ```
+    
+    Your `while` should now look like this:
+    
+    ```python
+    while True:
+    blocks = get_blocks()
+    pixels = map_blocks_to_colours(blocks)
+    pixels[player_pos] = black
     sense.set_pixels(pixels)
     ```
 
