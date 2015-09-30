@@ -1,9 +1,9 @@
 from sense_hat import SenseHat
-from mcpi import minecraft
+from mcpi.minecraft import Minecraft
 from time import sleep
 
 sense = SenseHat()
-mc = minecraft.Minecraft.create()
+mc = Minecraft.create()
 
 known_blocks = {}
 

@@ -341,11 +341,11 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
     ```python
     from sense_hat import SenseHat
-    from mcpi import minecraft
+    from mcpi.minecraft import Minecraft
     from time import sleep
 
     sense = SenseHat()
-    mc = minecraft.Minecraft.create()
+    mc = Minecraft.create()
 
     def get_blocks():
         blocks = []
