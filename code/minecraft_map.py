@@ -14,9 +14,9 @@ def get_blocks():
     y -= 1
 
     blocks = []
-    for dx in range(x-3, x+5):
-        for dz in range(z-3, z+5):
-            b = (dx, dz)
+    for dz in range(z-3, z+5):
+        for dx in range(x-3, x+5):
+            b = (dx, y, dz)
             if b in known_blocks:
                 block = known_blocks[b]
             else:

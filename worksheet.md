@@ -357,7 +357,9 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
 1. Now you'll need to implement your `get_blocks` function. It would be nice to have a generic `get_blocks` function for any given range of `x`, `y` and `z` returning a cuboid of block IDs but for our purposes this is unnecessary as all we need is an 8x8 grid on the same y-axis.
 
-    Starting with a simple version, we want a
+    Starting with a simple version, we want to look up the block the player is standing on, and the 3 blocks to the right of the player to return a list of four block IDs:
+
+    ![First get_blocks loop](images/first-get-blocks-loop.png)
 
     Enter the following code into your function:
 
@@ -390,8 +392,6 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
 1. Run the code and you should see a list of four numbers (block IDs), which will be the block you are standing on and the three blocks to the side of you (the direction depends on which way you're facing).
 
-    ![First get_blocks loop](images/first-get-blocks-loop.png)
-
 1. Now you'll want to make the function do the same for a 2-dimensional space. This version loops over `x` and `z` 4 times and returns 16 values:
 
     ```python
@@ -399,8 +399,8 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
         blocks = []
         x, y, z = mc.player.getTilePos()
         y -= 1
-        for dx in range(x, x+4):
-            for dz in range(z, z+4):
+        for dz in range(z, z+4):
+            for dx in range(x, x+4):
                 block = mc.getBlock(dx, y, dz)
                 blocks.append(block)
         return blocks
@@ -411,15 +411,13 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
     - `blocks = []`: creates a new empty list.
     - `x, y, z = mc.player.getTilePos()`: get the player's position.
     - `y -= 1`: subtract one from the `y` coordinate to look at the level below the player.
-    - `for dx in range(x, x+4):`: use `x` values from the player to 3 blocks away from the player.
-    - `for dx in range(z, z+4):`: use `z` values from the player to 3 blocks away from the player.
+    - `for dz in range(z, z+4):`: use `z` values from the player to 3 blocks away from the player (4 rows in total).
+    - `for dx in range(x, x+4):`: use `x` values from the player to 3 blocks away from the player (4 columns in total).
     - `block = mc.getBlock(dx, y, dz)`: look up the block at this location.
     - `blocks.append(block)`: add this block to the list.
     - `return blocks`: by the time the program gets to this line, this contains 16 blocks as it's been through each loop 4 times.
 
-1. Run the code and you should see a list of 16 block IDs, starting with the block you're standing on and the 7 to the side of you, followed by each row of 8 blocks away from you:
-
-    ![Second get_blocks loop](images/second-get-blocks-loop.png)
+1. Run the code and you should see a list of 16 block IDs, starting with the block you're standing on and the 7 to the side of you, followed by each row of 8 blocks away from you.
 
 1. Now you'll want to make it loop over 8 rows and 8 columns, and make sure it looks to the left and right, and both behind and ahead of you. This version loops over `x` and `z` 8 times and returns 64 values:
 
@@ -428,8 +426,8 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
         blocks = []
         x, y, z = mc.player.getTilePos()
         y -= 1
-        for dx in range(x-3, x+5):
-            for dz in range(z-3, z+5):
+        for dz in range(z-3, z+5):
+            for dx in range(x-3, x+5):
                 block = mc.getBlock(dx, y, dz)
                 blocks.append(block)
         return blocks
@@ -437,8 +435,8 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
     **What does it do?**
 
-    - `for dx in range(x-3, x+5):`: use `x` values from 3 left of the player over to 5 to the right (8 rows in total).
-    - `for dz in range(z-3, z+5):`: use `z` values from 3 behind the player up to 5 ahead (8 columns in total).
+    - `for dz in range(z-3, z+5):`: use `z` values from 3 behind the player up to 5 ahead (8 rows in total).
+    - `for dx in range(x-3, x+5):`: use `x` values from 3 left of the player over to 5 to the right (8 columns in total).
     - `return blocks` - by the time the program gets to this line, this contains 64 blocks as it's been through each loop 8 times.
 
 1. Run the code and you should see a list of 64 block IDs. This time they should be the 8x8 grid of blocks surrounding your player, with you in the middle (there's no centre point of an 8x8 grid so you're just off-centre):
@@ -478,8 +476,8 @@ In order to reduce the lag, you'll need to use a technique called caching. This 
 1. Inside the function, modify the loop to look like this:
 
     ```python
-    for dx in range(x-3, x+5):
-        for dz in range(z-3, z+5):
+    for dz in range(z-3, z+5):
+        for dx in range(x-3, x+5):
             b = (dx, y, dz)
             if b in known_blocks:
                 block = known_blocks[b]
