@@ -8,8 +8,6 @@ The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs which you can se
 
 1. Mount the Sense HAT on your Raspberry Pi and boot up the Pi.
 
-    ![Mounting the Sense HAT](images/mount-sense-hat.png)
-
 1. Open the Terminal app from the applications menu, under **Accessories**, or from the taskbar:
 
     ![Open Terminal](images/terminal-app-menu.png)
