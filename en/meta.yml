@@ -1,0 +1,28 @@
+---
+title: Sense HAT Minecraft Map
+hero_image: images/banner.png
+description: 'Use the Sense HAT to create a map of the world around your player in
+  Minecraft: Pi Edition'
+original_url: https://raspberrypi.org/learning/sense-hat-minecraft-map
+theme: red
+duration: 2
+listed: false
+ingredient: false
+copyedit: true
+curriculum: creator, design-0, programming-0, phys-comp-0, manufacture-0, community-0
+interests: ''
+technologies: rpi, physical computing, python
+site_areas: ''
+steps:
+- title: Introduction
+- title: What you will need
+- title: Sense HAT Minecraft Map
+- title: Getting started with the Sense HAT's LED display
+- title: Exploring the Minecraft world
+- title: Minecraft Sense HAT Colour Walk
+- title: Setting individual LEDs on the Sense HAT
+- title: Write a get_blocks function
+- title: Reduce the lag with caching
+- title: Create the map
+- title: What next?
+
