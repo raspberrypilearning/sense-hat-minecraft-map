@@ -1,70 +1,90 @@
-## Exploring the Minecraft world
+## Minecraft Sense HAT Colour Walk
 
-Now you've had a go at setting the colours of the Sense HAT LED matrix, let's open up Minecraft and have a look around to see what block types you can identify.
+Now you've explored the Minecraft world and seen the different block IDs that are printed out as you walk around, you're going to learn to make the Sense HAT show a different colour depending on what type of block you're standing on in the Minecraft world!
 
-- Open Minecraft from the application menu, under **Games**:
+- You're going need a way to create a mapping from a block ID to a colour; for example, grass should map to green, so block ID `2` should map to the colour code `(0, 255, 0)`.
 
-    ![Open Minecraft](images/minecraft-app-menu.png)
-
-- Click **Start Game** and then either create a new world or enter an existing world.
-
-- Press the `Tab` key to regain access to the mouse cursor and then move the Minecraft window to one side of your screen.
-
-- Return to the Python windows. Open another new window from the Python shell and save it as `minecraft-colours.py` in the same project folder.
-
-- Move this window so that it is on the other side of the screen, and you can see the Python window and the Minecraft window side by side.
-
-- Enter the following code to get started:
+    Start by adding some variables to identify block IDs. Add the following code above your `while` loop like so:
 
     ```python
-    from sense_hat import SenseHat
-    from mcpi.minecraft import Minecraft
-    from time import sleep
-
-    sense = SenseHat()
-    mc = Minecraft.create()
-
-    mc.postToChat("Hello Minecraft!")
-    sense.clear(0, 255, 0)
+    # blocks
+    grass = 2
+    water = 9
+    sand = 12
     ```
 
-- Save and run your code!
+    The first line is a comment helping explain what that bit of code is for. These variables are all integers (whole numbers) because that's what block IDs are represented by.
 
-    You should see the text "Hello Minecraft" appear in the Minecraft window and the Sense HAT should turn green!
+- Below that, add the colours that represent these block types:
 
-- Now you've created a connection to both the Sense HAT and the Minecraft world, let's look at how you can determine what type of block you're standing on. Remove the `postToChat` and `sense.clear` lines and add the following code:
+    ```python
+    # colours
+    green = (0, 255, 0)
+    blue = (0, 0, 255)
+    yellow = (255, 255, 0)
+    ```
+    These variables are tuples. A tuple is a data type (like an integer, string, or list) used to store a number of items in a particular order. These could be the `x`, `y` and `z` coordinates or, as in this case, the `R`, `G` and `B` values of a colour. These are 3-tuples because they each contain 3 values.
+
+- Next, below the colours, create a dictionary mapping each of the block types to a particular colour:
+
+    ```python
+    # block: colour
+    colours = {
+        grass: green,
+        water: blue,
+        sand: yellow,
+    }
+    ```
+    A dictionary is a data type used for storing relations between two objects, like an address book mapping a name to a telephone number. The items in the dictionary are referred to as key-value pairs, so in an address book the name is the "key" and the phone number is the "value". In our case the block type is the "key" and the colour is the "value".
+
+- Now all that's left to do is to look up the block you're standing on, see which colour it should be, and use `sense.clear` to change the colour of the Sense HAT display accordingly!
+
+    To look up a value in a dictionary, you pass in the key. If the dictionary was an address book, you'd pass in the name and be given that person's phone number. So to look up the block type `grass` you'd use `colours[2]` or `colours[grass]` and you'd get back the value for green which is `(0, 255, 0)`.
+
+    Modify your `while` loop to look like this:
 
     ```python
     while True:
         x, y, z = mc.player.getTilePos()
         block = mc.getBlock(x, y-1, z)
-        print(block)
+        colour = colours[block]
+        print(colour)
         sleep(0.1)
     ```
+    Here we're looking up the ID of the block the player is standing on, as before, and then looking that up in the `colours` dictionary, then printing out the colour code tuple.
 
-- Save and run the code.
+- Save and run the code, and walk around the Minecraft world.
 
-    You should now see numbers being constantly printed to the Python shell. These numbers represent the IDs of the block your player is standing on. Walk around over different terrain and you'll see the number change. Note that you use the WASD keys to walk around, and the space bar to jump or fly
+    You should see the colour code of the block you're standing on. Walk around to see different colour codes. When you walk on grass you should see `(0, 255, 0)`, when you're on sand you should see `(255, 255, 0)`, and on water, `(0, 0, 255)`.
 
-    **How does it work?**
+- If you walk over a block that isn't in the dictionary, you'll get an error message. If you haven't found another block type yet, just jump in the air using the space bar, and you'll get this error:
 
-    - `while True`: this is an infinite loop.
-    - `x, y, z = mc.player.getTilePos()`: this gets the coordinates of where your player is standing and sets them to variables `x`, `y` and `z`.
-    - `block = mc.getBlock(x, y-1, z)`: this looks up the ID of the block directly beneath the player (`y-1` means one below the player's `y` coordinate, which is the vertical axis).
-    - `print(block)`: this shows us which block ID was returned by `getBlock`.
-    - `sleep(0.1)`: this pauses for a tenth of a second each time the loop runs, so it's not printing out too fast.
+    ![Dictionary KeyError](images/dictionary-keyerror.png)
 
-- You need to know the block types that are represented by the IDs you're seeing. Some common ones are:
+    This error is a `KeyError`, which is a Python exception meaning you tried to look up the value of a key which isn't in the dictionary, like trying to get the telephone number of a name you haven't got recorded.
 
-    ```
-    Air:   0
-    Stone: 1
-    Grass: 2
-    Dirt:  3
-    Water: 8
-    Sand: 12
-    Ice:  79
+- First of all, let's deal with the `KeyError`. Modify your colour lookup like so:
+
+    ```python
+    if block in colours:
+        colour = colours[block]
+        print(colour)
+    else:
+        print("Don't know block ID %s" % block)
+    sleep(0.1)
     ```
 
-    See which block types you can identify while walking around the Minecraft world.
+    Now it will check to see if the key is in the dictionary before looking up its value. If it's not, it will tell you which block ID it was.
+
+- Finally, now you have a colour value representing the block type your player is standing on, you can tell the Sense HAT to show that colour on the LED display, simply by changing the `print(colour)` line to:
+
+    ```python
+    sense.clear(colour)
+    ```
+
+- Save and run the code, and walk around the Minecraft world and your Sense HAT should show green, blue or yellow when you walk on grass, water and sand.
+
+- Now add more blocks and colours to your dictionary!
+
+**Download a copy of [minecraft_colour.py](resources/minecraft_colour.py)**
 

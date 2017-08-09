@@ -16,7 +16,6 @@ site_areas: ''
 steps:
 - title: Introduction
 - title: What you will need
-- title: Sense HAT Minecraft Map
 - title: Getting started with the Sense HAT's LED display
 - title: Exploring the Minecraft world
 - title: Minecraft Sense HAT Colour Walk

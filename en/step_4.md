@@ -1,71 +1,70 @@
-## Getting started with the Sense HAT's LED display
+## Exploring the Minecraft world
 
-The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs which you can set to any colour using the Sense HAT Python module, to learn about how colour displays in electronic systems work.
+Now you've had a go at setting the colours of the Sense HAT LED matrix, let's open up Minecraft and have a look around to see what block types you can identify.
 
-- Mount the Sense HAT on your Raspberry Pi and boot up the Pi, referring to the [assembly instructions](https://projects.raspberrypi.org/en/projects/astro-pi-guide/assemble.md) in the Sense HAT guide if neccessary.
+- Open Minecraft from the application menu, under **Games**:
 
-- Open the Terminal app from the applications menu, under **Accessories**, or from the taskbar:
+    ![Open Minecraft](images/minecraft-app-menu.png)
 
-    ![Open Terminal](images/terminal-app-menu.png)
+- Click **Start Game** and then either create a new world or enter an existing world.
 
-- Create a new directory for your project by entering the following command:
+- Press the `Tab` key to regain access to the mouse cursor and then move the Minecraft window to one side of your screen.
 
-    ```bash
-    mkdir minecraft-map
-    ```
+- Return to the Python windows. Open another new window from the Python shell and save it as `minecraft-colours.py` in the same project folder.
 
-    `mkdir` means "make directory"; "directory" is another word for a folder.
+- Move this window so that it is on the other side of the screen, and you can see the Python window and the Minecraft window side by side.
 
-- Open Python 3 from the applications menu, under **Programming**:
-
-    ![Open Python 3](images/python3-app-menu.png)
-
-- When the Python shell window opens up, click `File > New Window` to open a new window. This is where you'll enter your code.
-
-- Save the file as `colours.py` in your new `minecraft-map` folder.
-
-- Enter the following code:
+- Enter the following code to get started:
 
     ```python
     from sense_hat import SenseHat
+    from mcpi.minecraft import Minecraft
+    from time import sleep
 
     sense = SenseHat()
+    mc = Minecraft.create()
 
-    sense.clear(255, 0, 0)
+    mc.postToChat("Hello Minecraft!")
+    sense.clear(0, 255, 0)
     ```
 
-- Save with `Ctrl + S` and run with `F5`.
+- Save and run your code!
 
-    Your Sense HAT LEDs should now all be red!
+    You should see the text "Hello Minecraft" appear in the Minecraft window and the Sense HAT should turn green!
+
+- Now you've created a connection to both the Sense HAT and the Minecraft world, let's look at how you can determine what type of block you're standing on. Remove the `postToChat` and `sense.clear` lines and add the following code:
+
+    ```python
+    while True:
+        x, y, z = mc.player.getTilePos()
+        block = mc.getBlock(x, y-1, z)
+        print(block)
+        sleep(0.1)
+    ```
+
+- Save and run the code.
+
+    You should now see numbers being constantly printed to the Python shell. These numbers represent the IDs of the block your player is standing on. Walk around over different terrain and you'll see the number change. Note that you use the WASD keys to walk around, and the space bar to jump or fly
 
     **How does it work?**
 
-    - `from sense_hat import SenseHat`: this lets you use the Sense HAT module.
-    - `sense = SenseHat()`: this creates a connection to the Sense HAT hardware, called `sense`.
-    - `sense.clear(255, 0, 0)`: here we call the `clear` method (function) on the `sense` object and pass in three colour values, for red, green and blue.
+    - `while True`: this is an infinite loop.
+    - `x, y, z = mc.player.getTilePos()`: this gets the coordinates of where your player is standing and sets them to variables `x`, `y` and `z`.
+    - `block = mc.getBlock(x, y-1, z)`: this looks up the ID of the block directly beneath the player (`y-1` means one below the player's `y` coordinate, which is the vertical axis).
+    - `print(block)`: this shows us which block ID was returned by `getBlock`.
+    - `sleep(0.1)`: this pauses for a tenth of a second each time the loop runs, so it's not printing out too fast.
 
-    **How do colour displays work?**
+- You need to know the block types that are represented by the IDs you're seeing. Some common ones are:
 
-    - All colours displayed in electronic systems are made up of a red value, a green value, and a blue value which can be combined to give a wide range of colours, a bit like mixing coloured paints.
-    - Colour values go from `0` (none) to `255` (full).
-    - Here we used `(255, 0, 0)`, which is full red, no green and no blue.
-    - Similarly, `(0, 255, 0)` is full green and `(0, 0, 255)` is full blue.
-    - Purple is a mix of blue and red, so `(255, 0, 255)` is purple.
+    ```
+    Air:   0
+    Stone: 1
+    Grass: 2
+    Dirt:  3
+    Water: 8
+    Sand: 12
+    Ice:  79
+    ```
 
-- Try changing the colour to:
-
-    - green `(0, 255, 0)`
-    - blue `(0, 0, 255)`
-
-- More things to try (think before you try them)
-
-    - What colour does `(255, 255, 0)` make?
-    - If `(255, 0, 255)` makes purple, what would `(100, 0, 255)` and `(255, 0, 100)` look like?
-    - What colour does full red, green and blue `(255, 255, 255)` make?
-    - What colour does `(0, 0, 0)` make?
-    - What happens if you call `sense.clear()` without any colour values?
-
-    Inside each of the Sense HAT's 64 LEDs are three smaller LEDs: a red, a green, and a blue. All you're doing is setting the brightness of each one and it gives the whole LED a different colour.
-
-**Download a copy of [colour.py](resources/colour.py)**
+    See which block types you can identify while walking around the Minecraft world.
 
