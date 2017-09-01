@@ -10,61 +10,67 @@ Now you've had a go at setting the colours of the Sense HAT LED matrix, let's op
 
 - Press the `Tab` key to regain access to the mouse cursor and then move the Minecraft window to one side of your screen.
 
-- Return to the Python windows. Open another new window from the Python shell and save it as `minecraft-colours.py` in the same project folder.
+- Return to the Python windows.
 
 - Move this window so that it is on the other side of the screen, and you can see the Python window and the Minecraft window side by side.
 
-- Enter the following code to get started:
+- Now have a go at testing the connection to the Minecraft API.
 
-    ```python
-    from sense_hat import SenseHat
-    from mcpi.minecraft import Minecraft
-    from time import sleep
+[[[rpi-python-minecraft-testing]]]
 
-    sense = SenseHat()
-    mc = Minecraft.create()
+	```python
+	from sense_hat import SenseHat
+	import mcpi.minecraft as minecraft
 
-    mc.postToChat("Hello Minecraft!")
-    sense.clear(0, 255, 0)
-    ```
+	sense = SenseHat()
+	mc = minecraft.Minecraft.create()
 
-- Save and run your code!
+	red = (255, 0, 0)
+	sense.clear(red)
+	mc.postToChat("HELLO FROM MINECRAFT")
+	```
 
-    You should see the text "Hello Minecraft" appear in the Minecraft window and the Sense HAT should turn green!
 
-- Now you've created a connection to both the Sense HAT and the Minecraft world, let's look at how you can determine what type of block you're standing on. Remove the `postToChat` and `sense.clear` lines and add the following code:
+- Now you know how to create a connection to both the Sense HAT and the Minecraft world, let's look at how you can determine what type of block you're standing on.
 
-    ```python
-    while True:
-        x, y, z = mc.player.getTilePos()
-        block = mc.getBlock(x, y-1, z)
-        print(block)
-        sleep(0.1)
-    ```
+[[[rpi-python-minecraft-getblock]]]
 
-- Save and run the code.
+	```python
+	from sense_hat import SenseHat
+	import mcpi.minecraft as minecraft
 
-    You should now see numbers being constantly printed to the Python shell. These numbers represent the IDs of the block your player is standing on. Walk around over different terrain and you'll see the number change. Note that you use the WASD keys to walk around, and the space bar to jump or fly
+	sense = SenseHat()
+	mc = minecraft.Minecraft.create()
 
-    **How does it work?**
+	red = (255, 0, 0)
+	sense.clear(red)
 
-    - `while True`: this is an infinite loop.
-    - `x, y, z = mc.player.getTilePos()`: this gets the coordinates of where your player is standing and sets them to variables `x`, `y` and `z`.
-    - `block = mc.getBlock(x, y-1, z)`: this looks up the ID of the block directly beneath the player (`y-1` means one below the player's `y` coordinate, which is the vertical axis).
-    - `print(block)`: this shows us which block ID was returned by `getBlock`.
-    - `sleep(0.1)`: this pauses for a tenth of a second each time the loop runs, so it's not printing out too fast.
+	x, y, z = mc.player.getTilePos()
+	block = mc.getBlock(x, y-1, z)
+	print(block)
+	```
+- You can now use an infinite loop to constantly find out what block your Minecraft player is standing on, and print it out in the shell.
 
-- You need to know the block types that are represented by the IDs you're seeing. Some common ones are:
+[[[generic-python-while-true]]]
 
-    ```
-    Air:   0
-    Stone: 1
-    Grass: 2
-    Dirt:  3
-    Water: 8
-    Sand: 12
-    Ice:  79
-    ```
+--- hints --- --- hint ---
+It is the last three lines of your script that needs to be place in an infinite loop.
+--- /hint --- --- hint ---
+You can use `while True:` to create an inifinite loop.
+--- /hint --- --- hint ---
+- Your code should look something like this:
+	```python
+	from sense_hat import SenseHat
+	import mcpi.minecraft as minecraft
 
-    See which block types you can identify while walking around the Minecraft world.
+	sense = SenseHat()
+	mc = minecraft.Minecraft.create()
 
+	red = (255, 0, 0)
+	sense.clear(red)
+
+	x, y, z = mc.player.getTilePos()
+	block = mc.getBlock(x, y-1, z)
+	print(block)
+	```
+--- /hint --- --- /hints ---
