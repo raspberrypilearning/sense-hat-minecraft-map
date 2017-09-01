@@ -4,7 +4,38 @@ Now you've explored the Minecraft world and seen the different block IDs that ar
 
 - You're going need a way to create a mapping from a block ID to a colour; for example, grass should map to green, so block ID `2` should map to the colour code `(0, 255, 0)`.
 
-    Start by adding some variables to identify block IDs. Add the following code above your `while` loop like so:
+- You can achieve this mapping using a Python dictionary.
+
+[[[generic-python-basic-dictionaries]]]
+
+- Now create a dictionary linking block ids to colours
+
+--- hints --- --- hint ---
+You know that a block with an id of `2` is grass, and so should be linked to the colour green, which is `(0, 255, 0)`
+--- /hint --- --- hint ---
+Here's how that would look in a dictionary. You just need to add more colours.
+```python
+colours = {
+	2:(0, 255, 0)
+	}
+```
+--- /hint --- --- hint ---
+Here's a slightly fuller dictionary you could use.
+```python
+colours = {
+	2: (0, 255, 0),
+    1: (50, 50, 50),
+    3: (135, 89, 51),
+    7: (51, 23, 0),
+    9: (0, 195, 255),
+    12: (229, 255, 0),
+    46: (255, 0, 0),
+    49: (0, 0, 0)
+	}
+```
+--- /hint --- --- /hints ---
+
+- Start by adding some variables to identify block IDs. Add the following code above your `while` loop like so:
 
     ```python
     # blocks
@@ -13,9 +44,9 @@ Now you've explored the Minecraft world and seen the different block IDs that ar
     sand = 12
     ```
 
-    The first line is a comment helping explain what that bit of code is for. These variables are all integers (whole numbers) because that's what block IDs are represented by.
+- The first line is a comment helping explain what that bit of code is for. These variables are all integers (whole numbers) because that's what block IDs are represented by.
 
-- Below that, add the colours that represent these block types:
+- Below that, add some more colours that represent these block types:
 
     ```python
     # colours
@@ -23,9 +54,8 @@ Now you've explored the Minecraft world and seen the different block IDs that ar
     blue = (0, 0, 255)
     yellow = (255, 255, 0)
     ```
-    These variables are tuples. A tuple is a data type (like an integer, string, or list) used to store a number of items in a particular order. These could be the `x`, `y` and `z` coordinates or, as in this case, the `R`, `G` and `B` values of a colour. These are 3-tuples because they each contain 3 values.
 
-- Next, below the colours, create a dictionary mapping each of the block types to a particular colour:
+- Next you need to create a dictionary that can map blocktypes to colours.
 
     ```python
     # block: colour
