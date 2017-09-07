@@ -18,7 +18,7 @@ The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs which you can se
 
     `mkdir` means "make directory"; "directory" is another word for a folder.
 
-- Open Python 3 from the applications menu, under **Programming**.
+- Open Python 3 from the applications menu, under **Programming**, and create a new file.
 
 [[[rpi-gui-idle-opening]]]
 
@@ -30,13 +30,13 @@ The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs which you can se
 
 You can choose a different colour to play around with.
 
-[[[generic-theory-colours]]
+[[[generic-theory-colours]]]
 
 - Try setting the matrix to be:
   - Green
   - Blue
   - Yellow
-  
+
 --- hints --- --- hint ---
 Green would have colour values of `0, 255, 0`
 --- /hint --- --- hint ---

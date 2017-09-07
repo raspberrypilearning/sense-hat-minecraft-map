@@ -10,7 +10,7 @@ Now you've had a go at setting the colours of the Sense HAT LED matrix, let's op
 
 - Press the `Tab` key to regain access to the mouse cursor and then move the Minecraft window to one side of your screen.
 
-- Return to the Python windows.
+- Return to the Python window.
 
 - Move this window so that it is on the other side of the screen, and you can see the Python window and the Minecraft window side by side.
 
@@ -18,37 +18,37 @@ Now you've had a go at setting the colours of the Sense HAT LED matrix, let's op
 
 [[[rpi-python-minecraft-testing]]]
 
-	```python
-	from sense_hat import SenseHat
-	import mcpi.minecraft as minecraft
+```python
+from sense_hat import SenseHat
+import mcpi.minecraft as minecraft
 
-	sense = SenseHat()
-	mc = minecraft.Minecraft.create()
+sense = SenseHat()
+mc = minecraft.Minecraft.create()
 
-	red = (255, 0, 0)
-	sense.clear(red)
-	mc.postToChat("HELLO FROM MINECRAFT")
-	```
+red = (255, 0, 0)
+sense.clear(red)
+mc.postToChat("HELLO FROM MINECRAFT")
+```
 
 
 - Now you know how to create a connection to both the Sense HAT and the Minecraft world, let's look at how you can determine what type of block you're standing on.
 
 [[[rpi-python-minecraft-getblock]]]
 
-	```python
-	from sense_hat import SenseHat
-	import mcpi.minecraft as minecraft
+```python
+from sense_hat import SenseHat
+import mcpi.minecraft as minecraft
 
-	sense = SenseHat()
-	mc = minecraft.Minecraft.create()
+sense = SenseHat()
+mc = minecraft.Minecraft.create()
 
-	red = (255, 0, 0)
-	sense.clear(red)
+red = (255, 0, 0)
+sense.clear(red)
 
-	x, y, z = mc.player.getTilePos()
-	block = mc.getBlock(x, y-1, z)
-	print(block)
-	```
+x, y, z = mc.player.getTilePos()
+block = mc.getBlock(x, y-1, z)
+print(block)
+```
 - You can now use an infinite loop to constantly find out what block your Minecraft player is standing on, and print it out in the shell.
 
 [[[generic-python-while-true]]]
@@ -56,21 +56,21 @@ Now you've had a go at setting the colours of the Sense HAT LED matrix, let's op
 --- hints --- --- hint ---
 It is the last three lines of your script that needs to be place in an infinite loop.
 --- /hint --- --- hint ---
-You can use `while True:` to create an inifinite loop.
+You can use `while True:` to create an infinite loop.
 --- /hint --- --- hint ---
 - Your code should look something like this:
-	```python
-	from sense_hat import SenseHat
-	import mcpi.minecraft as minecraft
+```python
+from sense_hat import SenseHat
+import mcpi.minecraft as minecraft
 
-	sense = SenseHat()
-	mc = minecraft.Minecraft.create()
+sense = SenseHat()
+mc = minecraft.Minecraft.create()
 
-	red = (255, 0, 0)
-	sense.clear(red)
+red = (255, 0, 0)
+sense.clear(red)
 
-	x, y, z = mc.player.getTilePos()
-	block = mc.getBlock(x, y-1, z)
-	print(block)
-	```
+x, y, z = mc.player.getTilePos()
+block = mc.getBlock(x, y-1, z)
+print(block)
+```
 --- /hint --- --- /hints ---
