@@ -38,6 +38,7 @@ print(block)
 You can use `while True:` to create an infinite loop.
 --- /hint --- --- hint ---
 - Your code should look something like this:
+
 ```python
 from sense_hat import SenseHat
 import mcpi.minecraft as minecraft
