@@ -1,120 +1,172 @@
 ## Minecraft Sense HAT Colour Walk
 
-Now you've explored the Minecraft world and seen the different block IDs that are printed out as you walk around, you're going to learn to make the Sense HAT show a different colour depending on what type of block you're standing on in the Minecraft world!
+Let's make the Sense HAT show a different colour depending on what type of block you're standing on in the Minecraft world!
 
-- You're going need a way to create a mapping from a block ID to a colour; for example, grass should map to green, so block ID `2` should map to the colour code `(0, 255, 0)`.
+You're going need a way to associate a block ID with a colour; for example, grass is mostly green, so the grass block ID `2` should map to the green colour code `(0, 255, 0)`.
 
-- You can achieve this mapping using a Python dictionary.
+This is called **mapping** and you can achieve this using a special data structure called a dictionary.
 
 [[[generic-python-basic-dictionaries]]]
 
-- Now create a dictionary linking block ids to colours
++ Choose some block types and add some variables so that you can store the corresponding block ID. You can choose whichever blocks you like.
+
+Add your block variables above your `while` loop:
+
+```python
+grass = 2
+water = 9
+sand = 12
+```
+--- collapse ---
+---
+title: Minecraft block IDs
+---
+```
+AIR                 = Block(0)
+STONE               = Block(1)
+GRASS               = Block(2)
+DIRT                = Block(3)
+COBBLESTONE         = Block(4)
+WOOD_PLANKS         = Block(5)
+SAPLING             = Block(6)
+BEDROCK             = Block(7)
+WATER               = Block(8)
+WATER_STATIONARY    = Block(9)
+LAVA                = Block(10)
+LAVA_STATIONARY     = Block(11)
+SAND                = Block(12)
+GRAVEL              = Block(13)
+GOLD_ORE            = Block(14)
+IRON_ORE            = Block(15)
+COAL_ORE            = Block(16)
+WOOD                = Block(17)
+LEAVES              = Block(18)
+GLASS               = Block(20)
+LAPIS_LAZULI_ORE    = Block(21)
+LAPIS_LAZULI_BLOCK  = Block(22)
+SANDSTONE           = Block(24)
+BED                 = Block(26)
+COBWEB              = Block(30)
+GRASS_TALL          = Block(31)
+WOOL                = Block(35)
+FLOWER_YELLOW       = Block(37)
+FLOWER_CYAN         = Block(38)
+MUSHROOM_BROWN      = Block(39)
+MUSHROOM_RED        = Block(40)
+GOLD_BLOCK          = Block(41)
+IRON_BLOCK          = Block(42)
+STONE_SLAB_DOUBLE   = Block(43)
+STONE_SLAB          = Block(44)
+BRICK_BLOCK         = Block(45)
+TNT                 = Block(46)
+BOOKSHELF           = Block(47)
+MOSS_STONE          = Block(48)
+OBSIDIAN            = Block(49)
+TORCH               = Block(50)
+FIRE                = Block(51)
+STAIRS_WOOD         = Block(53)
+CHEST               = Block(54)
+DIAMOND_ORE         = Block(56)
+DIAMOND_BLOCK       = Block(57)
+CRAFTING_TABLE      = Block(58)
+FARMLAND            = Block(60)
+FURNACE_INACTIVE    = Block(61)
+FURNACE_ACTIVE      = Block(62)
+DOOR_WOOD           = Block(64)
+LADDER              = Block(65)
+STAIRS_COBBLESTONE  = Block(67)
+DOOR_IRON           = Block(71)
+REDSTONE_ORE        = Block(73)
+SNOW                = Block(78)
+ICE                 = Block(79)
+SNOW_BLOCK          = Block(80)
+CACTUS              = Block(81)
+CLAY                = Block(82)
+SUGAR_CANE          = Block(83)
+FENCE               = Block(85)
+GLOWSTONE_BLOCK     = Block(89)
+BEDROCK_INVISIBLE   = Block(95)
+STONE_BRICK         = Block(98)
+GLASS_PANE          = Block(102)
+MELON               = Block(103)
+FENCE_GATE          = Block(107)
+GLOWING_OBSIDIAN    = Block(246)
+NETHER_REACTOR_CORE = Block(247)
+```
+--- /collapse ---
+
++ Below that, add some variables containing colours which could represent these block types:
+
+```python
+green = (0, 255, 0)
+blue = (0, 0, 255)
+yellow = (255, 255, 0)
+```
+
++ Now create a dictionary called `colours` which links some block IDs to colours. Start by adding the grass example from above, and then choose some other blocks to add.
 
 --- hints --- --- hint ---
 You know that a block with an id of `2` is grass, and so should be linked to the colour green, which is `(0, 255, 0)`
 --- /hint --- --- hint ---
-Here's how that would look in a dictionary. You just need to add more colours.
+Here's how that would look in a dictionary. Now you can add more blocks and their associated colours - but don't forget to define the variables for the blocks and the colours before you add them to your dictionary!
 ```python
 colours = {
-	2:(0, 255, 0)
-	}
-```
---- /hint --- --- hint ---
-Here's a slightly fuller dictionary you could use.
-```python
-colours = {
-	2: (0, 255, 0),
-    1: (50, 50, 50),
-    3: (135, 89, 51),
-    7: (51, 23, 0),
-    9: (0, 195, 255),
-    12: (229, 255, 0),
-    46: (255, 0, 0),
-    49: (0, 0, 0)
+	grass: green,
+    water: blue,
+    sand: yellow
 	}
 ```
 --- /hint --- --- /hints ---
 
-- Start by adding some variables to identify block IDs. Add the following code above your `while` loop like so:
++ Inside your `while` loop, add a line of code at the end to look up the block ID the player is standing on in the dictionary.
 
-    ```python
-    # blocks
-    grass = 2
-    water = 9
-    sand = 12
-    ```
+To look up a value in a dictionary, you pass in the key. If the dictionary was an address book, you'd pass in the name and be given that person's phone number. So to look up the block type `grass` you'd use `colours[grass]` and you'd get back the value for green which is `(0, 255, 0)`.
 
-- The first line is a comment helping explain what that bit of code is for. These variables are all integers (whole numbers) because that's what block IDs are represented by.
+```python
+standing_on = colours[block_id]
+```
 
-- Below that, add some more colours that represent these block types:
++ Now you know which colour this block should be, use `sense.clear` to display that colour on the Sense HAT LED matrix.
 
-    ```python
-    # colours
-    green = (0, 255, 0)
-    blue = (0, 0, 255)
-    yellow = (255, 255, 0)
-    ```
++ Add a `sleep` for 0.1 seconds after displaying the colour so you get a chance to see it before the next colour is displayed.
 
-- Next you need to create a dictionary that can map blocktypes to colours.
+[[[generic-python-sleep]]]
 
-    ```python
-    # block: colour
-    colours = {
-        grass: green,
-        water: blue,
-        sand: yellow,
-    }
-    ```
-    A dictionary is a data type used for storing relations between two objects, like an address book mapping a name to a telephone number. The items in the dictionary are referred to as key-value pairs, so in an address book the name is the "key" and the phone number is the "value". In our case the block type is the "key" and the colour is the "value".
++ Save and run your code, then walk around the Minecraft world. You should see the colour of the block you're standing on displayed on the Sense HAT.
 
-- Now all that's left to do is to look up the block you're standing on, see which colour it should be, and use `sense.clear` to change the colour of the Sense HAT display accordingly!
+You'l notice that if you walk over a block that isn't in the dictionary or fall off a ledge, you'll get an error message.
 
-    To look up a value in a dictionary, you pass in the key. If the dictionary was an address book, you'd pass in the name and be given that person's phone number. So to look up the block type `grass` you'd use `colours[2]` or `colours[grass]` and you'd get back the value for green which is `(0, 255, 0)`.
+![Dictionary KeyError](images/dictionary-keyerror.png)
 
-    Modify your `while` loop to look like this:
+This `KeyError` means you tried to look up the value of a key which isn't in the dictionary. Or, in other words, you stood on a block that you hadn't defined a colour for. (Even air counts as a block, so you'll also see this message if you jump!)
 
-    ```python
-    while True:
-        x, y, z = mc.player.getTilePos()
-        block = mc.getBlock(x, y-1, z)
-        colour = colours[block]
-        print(colour)
-        sleep(0.1)
-    ```
-    Here we're looking up the ID of the block the player is standing on, as before, and then looking that up in the `colours` dictionary, then printing out the colour code tuple.
+- Add an `if` statement to check whether the block ID of the block you are standing on is in the `colours` dictionary. If it is, look up the corresponding colour and display it on the Sense HAT. If not, print a message saying that you don't know which block that is.
 
-- Save and run the code, and walk around the Minecraft world.
+--- hints ---
+--- hint ---
+**If** the **block_id** is **in** the **colours** dictionary:
+-- **Look up** the colour
+-- **Display** the colour on the Sense HAT LED matrix
+**Else**
+-- **Print** I don't know which block that is
+--- /hint ---
 
-    You should see the colour code of the block you're standing on. Walk around to see different colour codes. When you walk on grass you should see `(0, 255, 0)`, when you're on sand you should see `(255, 255, 0)`, and on water, `(0, 0, 255)`.
+--- hint ---
+You can check whether a block_id is in the colours dictionary like this:
 
-- If you walk over a block that isn't in the dictionary, you'll get an error message. If you haven't found another block type yet, just jump in the air using the space bar, and you'll get this error:
+```python
+if block_id in colours:
+```
+--- /hint ---
+--- hint ---
+Here is how your code should look:
 
-    ![Dictionary KeyError](images/dictionary-keyerror.png)
-
-    This error is a `KeyError`, which is a Python exception meaning you tried to look up the value of a key which isn't in the dictionary, like trying to get the telephone number of a name you haven't got recorded.
-
-- First of all, let's deal with the `KeyError`. Modify your colour lookup like so:
-
-    ```python
-    if block in colours:
-        colour = colours[block]
-        print(colour)
-    else:
-        print("Don't know block ID %s" % block)
-    sleep(0.1)
-    ```
-
-    Now it will check to see if the key is in the dictionary before looking up its value. If it's not, it will tell you which block ID it was.
-
-- Finally, now you have a colour value representing the block type your player is standing on, you can tell the Sense HAT to show that colour on the LED display, simply by changing the `print(colour)` line to:
-
-    ```python
-    sense.clear(colour)
-    ```
-
-- Save and run the code, and walk around the Minecraft world and your Sense HAT should show green, blue or yellow when you walk on grass, water and sand.
-
-- Now add more blocks and colours to your dictionary!
-
-**Download a copy of [minecraft_colour.py](resources/minecraft_colour.py)**
-
+```python
+if block_id in colours:
+    standing_on = colours[block_id]
+    sense.clear(standing_on)
+else:
+    print("I don't know which block that is")
+sleep(0.1)
+```
++ Save and run the code, and walk around the Minecraft world and your Sense HAT should show green, blue or yellow when you walk on grass, water and sand.

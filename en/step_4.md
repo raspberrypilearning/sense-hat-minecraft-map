@@ -18,7 +18,9 @@ Now you've had a go at setting the colours of the Sense HAT LED matrix, let's op
 
 [[[rpi-python-minecraft-testing]]]
 
-Now you know how to create a connection to both the Sense HAT and the Minecraft world, let's look at how you can determine what type of block you're standing on.
+Now you know how to create a connection to both the Sense HAT and the Minecraft world, you can remove the line of code which creates message "Hello from Minecraft".
+
+Let's look at how you can determine what type of block you're standing on.
 
 [[[rpi-python-minecraft-getblock]]]
 
@@ -31,8 +33,8 @@ It is the last three lines of your script that need to be placed in an infinite 
 
 ```python
 x, y, z = mc.player.getTilePos()
-block = mc.getBlock(x, y-1, z)
-print(block)
+block_id = mc.getBlock(x, y-1, z)
+print(block_id)
 ```
 --- /hint --- --- hint ---
 You can use `while True:` to create an infinite loop.
@@ -51,7 +53,7 @@ sense.clear(red)
 
 while True:
     x, y, z = mc.player.getTilePos()
-    block = mc.getBlock(x, y-1, z)
-    print(block)
+    block_id = mc.getBlock(x, y-1, z)
+    print(block_id)
 ```
 --- /hint --- --- /hints ---

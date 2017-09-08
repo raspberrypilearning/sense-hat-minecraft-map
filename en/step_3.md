@@ -8,15 +8,15 @@ The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs which you can se
 
 - Open the Terminal app from the applications menu, under **Accessories**, or from the taskbar or by pressing `CTRL`+`ALT`+`T`.
 
-    ![Open Terminal](images/terminal-app-menu.png)
+![Open Terminal](images/terminal-app-menu.png)
 
 - Create a new directory for your project by entering the following command:
 
-    ```bash
-    mkdir minecraft-map
-    ```
+```bash
+mkdir minecraft-map
+```
 
-    `mkdir` means "make directory"; "directory" is another word for a folder.
+`mkdir` means "make directory"; "directory" is another word for a folder.
 
 - Open Python 3 from the applications menu, under **Programming**, and create a new file.
 
