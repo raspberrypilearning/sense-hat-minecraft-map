@@ -1,4 +1,4 @@
-## Minecraft Sense HAT Colour Walk
+## Display the block colour
 
 Let's make the Sense HAT show a different colour depending on what type of block you're standing on in the Minecraft world!
 
@@ -21,6 +21,7 @@ sand = 12
 ---
 title: Minecraft block IDs
 ---
+Choose some blocks to represent. Here is a list of some of the block types, but don't copy and paste from here as they are not in the format you need!
 ```
 AIR                 = Block(0)
 STONE               = Block(1)
@@ -120,11 +121,11 @@ colours = {
 
 + Inside your `while` loop, add a line of code at the end to look up the block ID the player is standing on in the dictionary.
 
-To look up a value in a dictionary, you pass in the key. If the dictionary was an address book, you'd pass in the name and be given that person's phone number. So to look up the block type `grass` you'd use `colours[grass]` and you'd get back the value for green which is `(0, 255, 0)`.
-
 ```python
 standing_on = colours[block_id]
 ```
+
+To look up a value in a dictionary, you provide the key. If the dictionary was a phone book, you'd provide the name and be given that person's phone number. So to look up the block type `grass` you'd use `colours[grass]` and you'd get back the value for green which is `(0, 255, 0)`.
 
 + Now you know which colour this block should be, use `sense.clear` to display that colour on the Sense HAT LED matrix.
 
@@ -169,4 +170,7 @@ else:
     print("I don't know which block that is")
 sleep(0.1)
 ```
+--- /hint ---
+--- /hints ---
+
 + Save and run the code, and walk around the Minecraft world and your Sense HAT should show green, blue or yellow when you walk on grass, water and sand.

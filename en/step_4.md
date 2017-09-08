@@ -1,4 +1,4 @@
-## Exploring the Minecraft world
+## What am I standing on?
 
 Now you've had a go at setting the colours of the Sense HAT LED matrix, let's open up Minecraft and have a look around to see what block types you can identify.
 

@@ -1,4 +1,4 @@
-## Getting started with the Sense HAT's LED display
+## Display a colour
 
 The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs which you can set to any colour using the Sense HAT Python module, to learn about how colour displays in electronic systems work.
 

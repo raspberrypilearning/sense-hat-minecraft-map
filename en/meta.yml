@@ -1,4 +1,3 @@
----
 title: Sense HAT Minecraft Map
 hero_image: images/banner.png
 description: 'Use the Sense HAT to create a map of the world around your player in
@@ -16,12 +15,11 @@ site_areas: ''
 steps:
 - title: Introduction
 - title: What you will need
-- title: Getting started with the Sense HAT's LED display
-- title: Exploring the Minecraft world
-- title: Minecraft Sense HAT Colour Walk
+- title: Display a colour
+- title: What am I standing on?
+- title: Display the block colour
 - title: Setting individual LEDs on the Sense HAT
 - title: Write a get_blocks function
 - title: Reduce the lag with caching
 - title: Create the map
 - title: What next?
-
