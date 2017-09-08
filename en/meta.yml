@@ -18,7 +18,7 @@ steps:
 - title: Display a colour
 - title: What am I standing on?
 - title: Display the block colour
-- title: Setting individual LEDs on the Sense HAT
+- title: Set a single LED
 - title: Write a get_blocks function
 - title: Reduce the lag with caching
 - title: Create the map

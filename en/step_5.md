@@ -173,4 +173,4 @@ sleep(0.1)
 --- /hint ---
 --- /hints ---
 
-+ Save and run the code, and walk around the Minecraft world and your Sense HAT should show green, blue or yellow when you walk on grass, water and sand.
++ Save and run the code, and walk around the Minecraft world. Your Sense HAT should show green, blue or yellow when you walk on grass, water and sand.
