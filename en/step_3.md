@@ -2,7 +2,7 @@
 
 The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs which you can set to any colour using the Sense HAT Python module, to learn about how colour displays in electronic systems work.
 
-- The first thing to do, is to attach your Sense Hat to your Raspberry Pi.
+- Attach your Sense Hat to your Raspberry Pi. If you don't have a Sense HAT, you could use the Raspberry Pi's built in Sense HAT emulator.
 
 [[[rpi-sensehat-attach]]]
 

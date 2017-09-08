@@ -19,7 +19,7 @@ steps:
 - title: What am I standing on?
 - title: Display the block colour
 - title: Set a single LED
-- title: Write a get_blocks function
+- title: Create a mini map
 - title: Reduce the lag with caching
 - title: Create the map
 - title: What next?

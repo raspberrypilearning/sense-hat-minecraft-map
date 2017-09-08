@@ -21,7 +21,7 @@ sense.clear()
 
 + Save and run the code. You should see a green pixel on the top left of the display (diagonally opposite the joystick).
 
-### Challenge: colour using a loop
+### Challenge: set lots of pixels using a loop
 
 Try setting the whole display to green using the `set_pixel` method and NOT using the `clear` method. To do this you will need to create two `for` loops, one inside the other, to loop through setting each pixel one by one.
 
@@ -39,8 +39,9 @@ for y in range(8):
 
 --- /collapse ---
 
+### Set lots of pixels at once
 
-To create a display using the whole LED matrix, it is usually quicker to use the `set_pixels()` method which takes in a list of 64 colours.
+To set colours on the whole LED matrix, it is usually quicker to use the `set_pixels()` method which takes in a list of 64 colours.
 
 [[[rpi-sensehat-multiple-pixels]]]
 
