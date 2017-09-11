@@ -7,35 +7,43 @@ In order to reduce the lag, you'll need to use a technique called caching. This 
     ```python
     known_blocks = {}
     ```
+- Now you need some code that will see if a block is in the dictionary. If it is in there, then there's no need to use the Minecraft API to look it up.
 
-- You'll need to access the `known_blocks` dictionary from within your `get_blocks` function. Python will let you read a variable you declared outside the function, but not write to it. In order to write to it, you'll need to make it a **global** within the function like so:
-
-    ```python
-    def get_blocks():
-        global known_blocks
-    ```
-    Global means you're changing the scope of the variable from being read-only to read/write.
-
-- Inside the function, modify the loop to look like this:
-
-    ```python
-    for dz in range(z-3, z+5):
-        for dx in range(x-3, x+5):
-            b = (dx, y, dz)
-            if b in known_blocks:
-                block = known_blocks[b]
-            else:
-                block = mc.getBlock(dx, y, dz)
-                known_blocks[b] = block
-            blocks.append(block)
-    ```
-
-    **What does it do?**
-
-    - `b = (dx, y, dz)`: create a 3-tuple of the current coordinates.
-    - `if b in known_blocks`: check if the block has already been looked up.
-    - `block = known_blocks[b]`: look up the block by its coordinates.
-    - `known_blocks[b] = block`: once a block is looked up for the first time, add it to the `known_blocks` dictionary.
+- Try and alter your `get_blocks` function so that it does the following.
+  1. create a new tuple containing the `dx`, `y` and `dz` coordinates within the nested `for` loops.
+  1. Check if the tuple is inside the `known_blocks` dictionary.
+  1. **If** it is, then set `block` to that value in the dictionary.
+  1. **Else** you'll need to use `getBlock` to set the block, and then add it to the dictionary.
+  
+--- hints --- --- hint ---
+Start by creating the tuple.
+```python
+for dz in range(z-3, z+5):
+	for dx in range(x-3, x+5):
+		b = (dx, y, dz)
+```
+--- /hint --- --- hint ---
+Now check if that tupple is in the dictionary, and if it is, use the value as the `block` id
+```python
+for dz in range(z-3, z+5):
+	for dx in range(x-3, x+5):
+		b = (dx, y, dz)
+		if b in known_blocks:
+			block = known_blocks[b]
+```
+--- /hint --- --- hint ---
+If it's not in the dictionary, then you need to find the block id and then the coordinate `key` to the block id `value`
+```python
+for dz in range(z-3, z+5):
+	for dx in range(x-3, x+5):
+		b = (dx, y, dz)
+		if b in known_blocks:
+			block = known_blocks[b]
+		else:
+			block = mc.getBlock(dx, y, dz)
+			known_blocks[b] = block
+```
+--- /hint --- --- /hints ---
 
 - Run the code and walk around. You should see it's a lot quicker at printing the blocks list out. Try reducing the `sleep` down to `0.1` and see if it can still cope.
-
+  

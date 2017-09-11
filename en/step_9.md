@@ -1,111 +1,63 @@
 ## Create the map
 
-Now all that's left to do is create the map. You've already learned how to look up a colour from a block ID and set colours to display on the Sense HAT so this should be easy!
+Now all that's left to do is create the map. At the moment, the data returned from the `get_blocks` function is a simple list of block ids. This needs to be changed so that it becomes a list of colour values.
 
-- Add in some block variables:
+- Create a new function above your `while True:` loop.
 
-    ```python
-    # blocks
-    air = 0
-    grass = 2
-    water = 9
-    sand = 12
-    ```
+```python
+def map_blocks_to_colours(blocks):
+```
 
-- Add some colours:
-
-    ```python
-    # colours
-    white = (255, 255, 255)
-    green = (0, 255, 0)
-    blue = (0, 0, 255)
-    yellow = (255, 255, 0)
-    black = (0, 0, 0)
-    ```
-
-- Create a dictionary mapping block IDs to colours:
-
-    ```python
-    # block: colour
-    colours = {
-        air: white,
-        grass: green,
-        water: blue,
-        sand: yellow,
-    }
-    ```
-
-- Modify your `while` loop like so:
-
-    ```python
-    while True:
-        blocks = get_blocks()
-        pixels = map_blocks_to_colours(blocks)
-        print(pixels)
-    ```
-
-    Here we get the blocks from the `get_blocks` function which looks them up in the cached `known_blocks` dictionary or uses `mc.getBlock` to find them out. Then we try to convert these block IDs into colours, but that's currently a missing piece!
-
-- Now you'll need a `map_blocks_to_colours` function which takes a list of block IDs and returns a list of corresponding colours. Add this after your `get_blocks` function:
-
-    ```python
-    def map_blocks_to_colours(blocks):
-        return [lookup_colour(block) for block in blocks]
-    ```
-
-    **How does it work?**
-
-    This function is a one-liner, but it's quite complex. It uses a concept called list comprehension, which is a way of building up a list in a loop in a concise way.
-
-    The whole thing is wrapped in square brackets, representing a list, and the definition is to call the `lookup_colour` function for each block in `blocks`. The list builds up as it loops over the list of blocks passed in, and is returned as a list of 64 colours.
-
-    However, we don't have a `lookup_colour` function yet either!
-
-- Next you'll need to create a new `lookup_colour` function that takes a block and returns a colour. You could just use `colours[block]` but that will fail if you try to look up a colour which you haven't yet set in your directory.
-
-    Here's a function that will return white if the block does not have a colour set:
-
-    ```python
-    def lookup_colour(block):
+- You'll now want to structure this function to look up the block colours. Here's how you could go about doing it:
+  1. Create a new list called pixels.
+  1. Use a `for` loop to iterate over the `blocks` list
+  1. **If** a `block` is in the `colours` dictionary, then look up it's colour and add it to the pixels list.
+  1. **Else** add another colour to the `pixels` list. `white` would be a good choice. `(255, 255, 255)`.
+  
+--- hints --- --- hint ---
+Start by creating the `pixels` list:
+```python
+def map_blocks_to_colours(blocks):
+    pixels = []
+```
+--- /hint --- --- hint ---
+Now use a `for` loop, to look up the block id and add the colour to the pixels list.
+```python
+def map_blocks_to_colours(blocks):
+    pixels = []
+    for block in blocks:
         if block in colours:
-            return colours[block]
+            pixels.append(colours[block])
+```
+--- /hint --- --- hint ---
+If it's not there, just add `(255, 255, 255)`. Then return the list of `pixels`
+```python
+def map_blocks_to_colours(blocks):
+    pixels = []
+    for block in blocks:
+        if block in colours:
+            pixels.append(colours[block])
         else:
-            return white
-    ```
+            pixels.append((255, 255, 255))
+    return pixels
+```
+--- /hint --- --- /hints ---
 
-- Now you have a 64 item `pixels` list, print it out to see what it looks like. It should contain 64 3-tuples representing different colour values.
+- To finish off you'll need to use your new function in your `while True:` loop. Alter it so that it gets the `pixels` and then sets the Sense Hat display with these pixels. You may also want to indicate the player's position. The player's coordinates are at position `27` in the `pixels` list.
 
-- You'll also need to define the variable `player_pos`. It'll need to be the number between `0` and `63` - the pixel which is the defined centre point of the grid. Since we used the range `x-3` to `x+5` and `z-3` to `z+5` the centre point will be the `(3, 3)` coordinate on the LED matrix, which is pixel number `27` as shown:
+![Sense HAT grid centre point](images/sense-hat-grid-centre-point.png)
 
-    ![Sense HAT grid centre point](images/sense-hat-grid-centre-point.png)
-
-    Add the line `player_pos = 27` before your `while` loop.
-
-- Now add a line to your `while` loop to modify the `pixels` list to set a black pixel where your player is standing:
-
-    ```python
-    pixels[player_pos] = black
-    ```
-
-- Everything's set up now and the last thing to do is send the list of pixels to the Sense HAT. Swap out the `print` line for a `set_pixels` one:
-
-    ```python
+```python
+while True:
+    blocks = get_blocks()
+    pixels = map_blocks_to_colours(blocks)
+    pixels[27] = [0,0,0]
     sense.set_pixels(pixels)
-    ```
+```
 
-    Your `while` should now look like this:
+- Save and run your code, then move slowly around your Minecraft world as you begin to build up a map.
 
-    ```python
-    while True:
-        blocks = get_blocks()
-        pixels = map_blocks_to_colours(blocks)
-        pixels[player_pos] = black
-        sense.set_pixels(pixels)
-    ```
+![Sense HAT Minecraft Map](images/sense-hat-minecraft-map.jpg)
 
-    This should now show a map of a small part of the Minecraft world around you. Walk around and watch it update!
 
-    ![Sense HAT Minecraft Map](images/sense-hat-minecraft-map.jpg)
-
-**Download a copy of [minecraft_map.py](resources/minecraft_map.py)**
 

@@ -34,16 +34,53 @@ for dx in range(x, x+4):
 
 + Finally, after your `for` loop, return the data from the `blocks` list
 
---- hints ---
+--- hints --- --- hint ---
+You should begin with your code, without the `while True:` but containing the function definition.
+```python
+from sense_hat import SenseHat
+import mcpi.minecraft as minecraft
+from time import sleep
 
+sense = SenseHat()
+mc = minecraft.Minecraft.create()
 
---- /hints ---
+grass = 2
+water = 9
+sand = 12
 
+green = (0, 255, 0)
+blue = (0, 0, 255)
+yellow = (255, 255, 0)
 
-- `for dx in range(x, x+4):`: use `x` values from the player to 3 blocks away from the player.
-- `block = mc.getBlock(dx, y, z)`: look up the block at this location.
-- `blocks.append(block)`: add this block to the list.
-- `return blocks`: by the time the program gets to this line, this contains 4 blocks as it's been through the loop 4 times.
+colours = {
+    grass: green,
+    water: blue,
+    sand: yellow,
+    }
+
+def get_blocks():
+```
+--- /hint --- --- hint ---
+The initial setup of the function creates a list and gets the `x`, `y`, and `z` coordinates.
+```python
+def get_blocks():
+    blocks = []
+    x, y, z = mc.player.getTilePos()
+    y -= 1
+```
+--- /hint --- --- hint ---
+The `for` loop should iterate over the blocks from `x` to `x+4`, add the block id to the list and then return the `blocks` list.
+```python
+def get_blocks():
+    blocks = []
+    x, y, z = mc.player.getTilePos()
+    y -= 1
+	    for dx in range(x, x+4):
+        block = mc.getBlock(new_x, y, z)
+        blocks.append(block)
+    return blocks
+```
+--- /hint --- --- /hints ---
 
 - Add a line to the end of your code to print out the result of the `get_blocks` function:
 
@@ -53,58 +90,53 @@ for dx in range(x, x+4):
 
 - Run the code and you should see a list of four numbers (block IDs), which will be the block you are standing on and the three blocks to the side of you (the direction depends on which way you're facing).
 
-- Now you'll want to make the function do the same for a 2-dimensional space. This version loops over `x` and `z` 4 times and returns 16 values:
+- Now you'll want to alter your code so that it looks at all the blocks to the left and right of the player as well. The blocks will be from `x-3` up to `x+5`
 
-    ```python
-    def get_blocks():
-        blocks = []
-        x, y, z = mc.player.getTilePos()
-        y -= 1
-        for dz in range(z, z+4):
-            for dx in range(x, x+4):
-                block = mc.getBlock(dx, y, dz)
-                blocks.append(block)
-        return blocks
-    ```
+- How about the blocks in front of and behind the player? These are on the `z` axis. You could do this by adding another `for` loop that loops over `z-3` up to `z+5`. The loop iterating over the `x` values can be nested within it.
 
-    **What does it do?**
+![Third get_blocks loop](images/third-get-blocks-loop.png)
 
-    - `blocks = []`: creates a new empty list.
-    - `x, y, z = mc.player.getTilePos()`: get the player's position.
-    - `y -= 1`: subtract one from the `y` coordinate to look at the level below the player.
-    - `for dz in range(z, z+4):`: use `z` values from the player to 3 blocks away from the player (4 rows in total).
-    - `for dx in range(x, x+4):`: use `x` values from the player to 3 blocks away from the player (4 columns in total).
-    - `block = mc.getBlock(dx, y, dz)`: look up the block at this location.
-    - `blocks.append(block)`: add this block to the list.
-    - `return blocks`: by the time the program gets to this line, this contains 16 blocks as it's been through each loop 4 times.
+--- hints --- --- hint ---
+Start by increasing the range over which the loop looks at the `x` axis.
+```python
+def get_blocks():
+	blocks = []
+	x, y, z = mc.player.getTilePos()
+	y -= 1
+	for dx in range(x-3, x+5):
+		block = mc.getBlock(dx, y, z)
+		blocks.append(block)
+	return blocks
+```
+--- /hint --- --- hint ---
+Now add in the loop over the `z` axis, and nest the other loop within it.
+```python
+def get_blocks():
+	blocks = []
+	x, y, z = mc.player.getTilePos()
+	y -= 1
+	for dz in range(z-3, z+5):
+		for dx in range(x-3, x+5):
+			block = mc.getBlock(dx, y, d)
+			blocks.append(block)
+	return blocks
+```
+--- /hint --- --- hint ---
+Lastly, make sure that the `getBlock` method is looking at `dz`.
+```python
+def get_blocks():
+	blocks = []
+	x, y, z = mc.player.getTilePos()
+	y -= 1
+	for dz in range(z-3, z+5):
+		for dx in range(x-3, x+5):
+			block = mc.getBlock(dx, y, dz)
+			blocks.append(block)
+	return blocks
+```
+--- /hint --- --- /hints ---
 
-- Run the code and you should see a list of 16 block IDs, starting with the block you're standing on and the 7 to the side of you, followed by each row of 8 blocks away from you.
-
-- Now you'll want to make it loop over 8 rows and 8 columns, and make sure it looks to the left and right, and both behind and ahead of you. This version loops over `x` and `z` 8 times and returns 64 values:
-
-    ```python
-    def get_blocks():
-        blocks = []
-        x, y, z = mc.player.getTilePos()
-        y -= 1
-        for dz in range(z-3, z+5):
-            for dx in range(x-3, x+5):
-                block = mc.getBlock(dx, y, dz)
-                blocks.append(block)
-        return blocks
-    ```
-
-    **What does it do?**
-
-    - `for dz in range(z-3, z+5):`: use `z` values from 3 behind the player up to 5 ahead (8 rows in total).
-    - `for dx in range(x-3, x+5):`: use `x` values from 3 left of the player over to 5 to the right (8 columns in total).
-    - `return blocks` - by the time the program gets to this line, this contains 64 blocks as it's been through each loop 8 times.
-
-- Run the code and you should see a list of 64 block IDs. This time they should be the 8x8 grid of blocks surrounding your player, with you in the middle (there's no centre point of an 8x8 grid so you're just off-centre):
-
-    ![Third get_blocks loop](images/third-get-blocks-loop.png)
-
-- Next, add a `while` loop to print the result of `get_blocks` every second:
+- To finish off this section add a `while` loop to print the result of `get_blocks` every second:
 
     ```python
     while True:
@@ -114,4 +146,4 @@ for dx in range(x, x+4):
 
 - Run the code and see it update as you walk around.
 
-    You will probably find that it's a bit laggy: it takes a small amount of time to retrieve each block ID, and you're trying to do 64 every second.
+You will probably find that it's a bit laggy: it takes a small amount of time to retrieve each block ID, and you're trying to do 64 every second.
