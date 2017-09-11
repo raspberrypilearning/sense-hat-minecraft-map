@@ -145,6 +145,11 @@ This `KeyError` means you tried to look up the value of a key which isn't in the
 
 --- hints ---
 --- hint ---
+First, make sure you've imported the `sleep` function using:
+```python
+from time import sleep
+```
+
 **If** the **block_id** is **in** the **colours** dictionary:
 -- **Look up** the colour
 -- **Display** the colour on the Sense HAT LED matrix

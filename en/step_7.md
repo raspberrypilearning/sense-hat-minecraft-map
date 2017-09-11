@@ -6,7 +6,7 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
 + Open up the `minecraft-map.py` file you were working on earlier.
 
-+ Underneath the import code, define a function called `get_blocks()`
++ Delete your `while True:` loop, and in it's place define a function called `get_blocks()`
 
 [[[generic-python-simple-functions]]]
 
@@ -27,10 +27,10 @@ Let's start simple and look up the player's position and the 3 blocks to the rig
 + Still inside the function, add a `for` loop which runs in the range `x` to `x + 4`. This means that the first block looked at will be the one immediately underneath the player, and the loop will stop looking at blocks when it gets to the block 4 spaces away from the player.
 
 ```python
-for new_x in range(x, x+4):
+for dx in range(x, x+4):
 ```
 
-+ Inside the loop, find the block ID of the block at the position `new_x`, and `append` it to the blocks list.
++ Inside the loop, find the block ID of the block at the position `dx`, and `append` it to the blocks list.
 
 + Finally, after your `for` loop, return the data from the `blocks` list
 
