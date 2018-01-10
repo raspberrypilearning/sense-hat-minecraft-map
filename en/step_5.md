@@ -6,8 +6,6 @@ You're going need a way to associate a block ID with a colour; for example, gras
 
 This is called **mapping** and you can achieve this using a special data structure called a dictionary.
 
-[[[generic-python-basic-dictionaries]]]
-
 + Choose some block types and add some variables so that you can store the corresponding block ID. You can choose whichever blocks you like.
 
 Add your block variables above your `while` loop:
@@ -106,13 +104,15 @@ yellow = (255, 255, 0)
 
 + Now create a dictionary called `colours` which links some block IDs to colours. Start by adding the grass example from above, and then choose some other blocks to add.
 
+[[[generic-python-basic-dictionaries]]]
+
 --- hints --- --- hint ---
 You know that a block with an id of `2` is grass, and so should be linked to the colour green, which is `(0, 255, 0)`
 --- /hint --- --- hint ---
 Here's how that would look in a dictionary. Now you can add more blocks and their associated colours - but don't forget to define the variables for the blocks and the colours before you add them to your dictionary!
 ```python
 colours = {
-	grass: green,
+    grass: green,
     water: blue,
     sand: yellow
 	}

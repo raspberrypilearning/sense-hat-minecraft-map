@@ -2,9 +2,13 @@
 
 The Sense HAT has an 8x8 LED matrix. That's 64 full-colour LEDs which you can set to any colour using the Sense HAT Python module, to learn about how colour displays in electronic systems work.
 
-- Attach your Sense Hat to your Raspberry Pi. If you don't have a Sense HAT, you could use the Raspberry Pi's built in Sense HAT emulator.
+- Attach your Sense Hat to your Raspberry Pi. 
 
 [[[rpi-sensehat-attach]]]
+
+- If you don't have a Sense HAT, you could use the Raspberry Pi's built in Sense HAT emulator.
+
+[[[rpi-sensehat-emulator]]]
 
 - Open the Terminal app from the applications menu, under **Accessories**, or from the taskbar or by pressing `CTRL`+`ALT`+`T`.
 
@@ -28,7 +32,7 @@ mkdir minecraft-map
 
 [[[rpi-python-sensehat-clear]]]
 
-You can choose a different colour to play around with.
+You can choose a different colour by changing the 3 (`red`, `green`, `blue`) values to a number `0` - `255`.
 
 [[[generic-theory-colours]]]
 

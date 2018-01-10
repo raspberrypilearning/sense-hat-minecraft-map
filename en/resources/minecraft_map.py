@@ -4,6 +4,7 @@ from time import sleep
 
 sense = SenseHat()
 mc = Minecraft.create()
+mc.postToChat("Minecraft map")
 
 known_blocks = {}
 

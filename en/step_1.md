@@ -1,6 +1,8 @@
 ## What you will make
 Use the Sense HAT to create a map of the world around your player in Minecraft: Pi Edition.
 
+![minecraft sense hat map](images/minecraft_sense_hat_map.png)
+
 ## What you will learn
 By following this resource you will learn:
 

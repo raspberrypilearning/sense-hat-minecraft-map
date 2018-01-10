@@ -4,6 +4,7 @@ from time import sleep
 
 sense = SenseHat()
 mc = minecraft.Minecraft.create()
+mc.postToChat("Minecraft map")
 
 grass = 2
 water = 9
@@ -27,8 +28,8 @@ def get_blocks():
     blocks = []
     x, y, z = mc.player.getTilePos()
     y -= 1
-    for dz in range(z-3, z+5):
-        for dx in range(x-3, x+5):
+    for dz in range(z - 3, z + 5):
+        for dx in range(x - 3, x + 5):
             b = (dx, y, dz)
             if b in known_blocks:
                 block = known_blocks[b]

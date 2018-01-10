@@ -6,6 +6,8 @@ In order to make an 8x8 map, you'll need to retrieve the block IDs for all block
 
 + Open up the `minecraft-map.py` file you were working on earlier.
 
+You will be making a lot of changes this program, so you may want to create a copy using **file**, **save as** and creating a new file.
+
 + Delete your `while True:` loop, and in it's place define a function called `get_blocks()`
 
 [[[generic-python-simple-functions]]]
@@ -24,10 +26,28 @@ Let's start simple and look up the player's position and the 3 blocks to the rig
 
 + Subtract one from the `y` coordinate. This is so that we are looking at the layer of blocks _beneath_ the player.
 
-+ Still inside the function, add a `for` loop which runs in the range `x` to `x + 4`. This means that the first block looked at will be the one immediately underneath the player, and the loop will stop looking at blocks when it gets to the block 4 spaces away from the player.
++ Still inside the function, add a `for` loop which runs in the range `x` to `x + 5`. This means that the first block looked at will be the one immediately underneath the player, and the loop will stop looking at blocks when it gets to the block `4` spaces away from the player.
+
+--- collapse ---
+
+---
+title: Why `x + 5` and not `x + 4`?
+---
+
+The following code will loop 5 times: 
 
 ```python
-for dx in range(x, x+4):
+for i in range(0, 5):
+```
+
+It does this by using `range` to create a list of elements starting at `0` up to, but **not including**, `5` i.e. `[0,1,2,3,4]`.
+
+In our Minecraft map example we want all the positions from our starting point `x` up to and **including** the block `4` spaces away, but as `range` doesn't include the last element we use `x + 5`.
+
+--- /collapse ---
+
+```python
+for dx in range(x, x + 5):
 ```
 
 + Inside the loop, find the block ID of the block at the position `dx`, and `append` it to the blocks list.
@@ -75,8 +95,8 @@ def get_blocks():
     blocks = []
     x, y, z = mc.player.getTilePos()
     y -= 1
-	    for dx in range(x, x+4):
-        block = mc.getBlock(new_x, y, z)
+	    for dx in range(x, x + 5):
+        block = mc.getBlock(dx, y, z)
         blocks.append(block)
     return blocks
 ```
@@ -100,39 +120,39 @@ def get_blocks():
 Start by increasing the range over which the loop looks at the `x` axis.
 ```python
 def get_blocks():
-	blocks = []
-	x, y, z = mc.player.getTilePos()
-	y -= 1
-	for dx in range(x-3, x+5):
-		block = mc.getBlock(dx, y, z)
-		blocks.append(block)
-	return blocks
+    blocks = []
+    x, y, z = mc.player.getTilePos()
+    y -= 1
+    for dx in range(x - 3, x + 5):
+        block = mc.getBlock(dx, y, z)
+        blocks.append(block)
+    return blocks
 ```
 --- /hint --- --- hint ---
 Now add in the loop over the `z` axis, and nest the other loop within it.
 ```python
 def get_blocks():
-	blocks = []
-	x, y, z = mc.player.getTilePos()
-	y -= 1
-	for dz in range(z-3, z+5):
-		for dx in range(x-3, x+5):
-			block = mc.getBlock(dx, y, d)
-			blocks.append(block)
-	return blocks
+    blocks = []
+    x, y, z = mc.player.getTilePos()
+    y -= 1
+    for dz in range(z - 3, z + 5):
+        for dx in range(x - 3, x + 5):
+            block = mc.getBlock(dx, y, d)
+            blocks.append(block)
+    return blocks
 ```
 --- /hint --- --- hint ---
 Lastly, make sure that the `getBlock` method is looking at `dz`.
 ```python
 def get_blocks():
-	blocks = []
-	x, y, z = mc.player.getTilePos()
-	y -= 1
-	for dz in range(z-3, z+5):
-		for dx in range(x-3, x+5):
-			block = mc.getBlock(dx, y, dz)
-			blocks.append(block)
-	return blocks
+    blocks = []
+    x, y, z = mc.player.getTilePos()
+    y -= 1
+    for dz in range(z - 3, z + 5):
+        for dx in range(x - 3, x + 5):
+            block = mc.getBlock(dx, y, dz)
+            blocks.append(block)
+    return blocks
 ```
 --- /hint --- --- /hints ---
 

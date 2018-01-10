@@ -18,30 +18,30 @@ In order to reduce the lag, you'll need to use a technique called caching. This 
 --- hints --- --- hint ---
 Start by creating the tuple.
 ```python
-for dz in range(z-3, z+5):
-	for dx in range(x-3, x+5):
-		b = (dx, y, dz)
+for dz in range(z - 3, z + 5):
+    for dx in range(x - 3, x + 5):
+        b = (dx, y, dz)
 ```
 --- /hint --- --- hint ---
 Now check if that tupple is in the dictionary, and if it is, use the value as the `block` id
 ```python
-for dz in range(z-3, z+5):
-	for dx in range(x-3, x+5):
-		b = (dx, y, dz)
-		if b in known_blocks:
-			block = known_blocks[b]
+for dz in range(z - 3, z + 5):
+    for dx in range(x - 3, x + 5):
+        b = (dx, y, dz)
+        if b in known_blocks:
+            block = known_blocks[b]
 ```
 --- /hint --- --- hint ---
 If it's not in the dictionary, then you need to find the block id and then the coordinate `key` to the block id `value`
 ```python
-for dz in range(z-3, z+5):
-	for dx in range(x-3, x+5):
-		b = (dx, y, dz)
-		if b in known_blocks:
-			block = known_blocks[b]
-		else:
-			block = mc.getBlock(dx, y, dz)
-			known_blocks[b] = block
+for dz in range(z - 3, z + 5):
+    for dx in range(x - 3, x + 5):
+        b = (dx, y, dz)
+        if b in known_blocks:
+            block = known_blocks[b]
+        else:
+            block = mc.getBlock(dx, y, dz)
+            known_blocks[b] = block
 ```
 --- /hint --- --- /hints ---
 

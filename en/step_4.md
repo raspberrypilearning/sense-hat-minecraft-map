@@ -14,11 +14,47 @@ Now you've had a go at setting the colours of the Sense HAT LED matrix, let's op
 
 + Move this window so that it is on the other side of the screen, and you can see the Python window and the Minecraft window side by side.
 
-+ Now have a go at testing the connection to the Minecraft API by importing the minecraft library at the top of your program, then creating the connection to Minecraft at the bottom.
++ Now import the minecraft library, create a connection to the Minecraft API and put the message "Minecraft map" on the screen
 
-[[[rpi-python-minecraft-testing]]]
+![hello minecraft map](images/minecraft_map_hello.png)
 
-Now you know how to create a connection to both the Sense HAT and the Minecraft world, you can remove the line of code which creates message "Hello from Minecraft".
+--- hints ---
+
+--- hint ---
+
+The `Minecraft` class from the `mcpi.minecraft` library has `create()` and `postToChat(message)` functions.
+
+--- /hint ---
+
+--- hint ---
+
++ `from` the `mcpi.minecraft` library import `Minecraft`
++ Use `Minecraft` to `create()` a connection object
++ The connection object's `postToChat("mymessage")` function will put a message in Minecraft
+
+--- /hint ---
+
+--- hint ---
+
+<video width="1024" height="768" controls>
+<source src="images/minecraft_create_connection.webm" type="video/webm">
+Your browser does not support WebM video, so try FireFox or Chrome.
+</video>
+
+--- /hint ---
+
+--- hint ---
+
+Use the following code:
+```python
+from mcpi.minecraft import Minecraft
+mc = Minecraft.create()
+mc.postToChat("Minecraft map")
+```
+
+--- /hint ---
+
+--- /hints ---
 
 Let's look at how you can determine what type of block you're standing on.
 
